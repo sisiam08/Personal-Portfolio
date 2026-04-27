@@ -1,0 +1,20 @@
+model Project {
+  id          String        @id @default(uuid())
+  title       String
+  slug        String        @unique
+
+  description String
+  problem     String
+  solution    String
+
+  githubUrl   String?
+  liveUrl     String?
+
+  status      ProjectStatus
+  featured    Boolean       @default(false)
+
+  createdAt   DateTime      @default(now())
+
+  images      ProjectImage[]
+  skills      Skill[]
+}
