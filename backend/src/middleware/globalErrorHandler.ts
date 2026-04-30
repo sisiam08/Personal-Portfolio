@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "../generated/prisma/client";
 
-function errorHandler(
+function globalErrorHandler(
   err: any,
   req: Request,
   res: Response,
@@ -39,4 +39,4 @@ function errorHandler(
   });
 }
 
-export default errorHandler;
+export default globalErrorHandler;
