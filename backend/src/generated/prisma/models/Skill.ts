@@ -40,10 +40,10 @@ export type SkillMinAggregateOutputType = {
   id: string | null
   name: string | null
   category: $Enums.SkillCategory | null
+  icon: string | null
   level: $Enums.SkillLevel | null
   projectExperience: number | null
   lastUsedYear: number | null
-  summary: string | null
   createdAt: Date | null
 }
 
@@ -51,10 +51,10 @@ export type SkillMaxAggregateOutputType = {
   id: string | null
   name: string | null
   category: $Enums.SkillCategory | null
+  icon: string | null
   level: $Enums.SkillLevel | null
   projectExperience: number | null
   lastUsedYear: number | null
-  summary: string | null
   createdAt: Date | null
 }
 
@@ -62,10 +62,10 @@ export type SkillCountAggregateOutputType = {
   id: number
   name: number
   category: number
+  icon: number
   level: number
   projectExperience: number
   lastUsedYear: number
-  summary: number
   createdAt: number
   _all: number
 }
@@ -85,10 +85,10 @@ export type SkillMinAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  icon?: true
   level?: true
   projectExperience?: true
   lastUsedYear?: true
-  summary?: true
   createdAt?: true
 }
 
@@ -96,10 +96,10 @@ export type SkillMaxAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  icon?: true
   level?: true
   projectExperience?: true
   lastUsedYear?: true
-  summary?: true
   createdAt?: true
 }
 
@@ -107,10 +107,10 @@ export type SkillCountAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  icon?: true
   level?: true
   projectExperience?: true
   lastUsedYear?: true
-  summary?: true
   createdAt?: true
   _all?: true
 }
@@ -205,10 +205,10 @@ export type SkillGroupByOutputType = {
   id: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt: Date
   _count: SkillCountAggregateOutputType | null
   _avg: SkillAvgAggregateOutputType | null
@@ -239,10 +239,10 @@ export type SkillWhereInput = {
   id?: Prisma.StringFilter<"Skill"> | string
   name?: Prisma.StringFilter<"Skill"> | string
   category?: Prisma.EnumSkillCategoryFilter<"Skill"> | $Enums.SkillCategory
+  icon?: Prisma.StringFilter<"Skill"> | string
   level?: Prisma.EnumSkillLevelFilter<"Skill"> | $Enums.SkillLevel
   projectExperience?: Prisma.IntFilter<"Skill"> | number
   lastUsedYear?: Prisma.IntFilter<"Skill"> | number
-  summary?: Prisma.StringFilter<"Skill"> | string
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   projects?: Prisma.ProjectListRelationFilter
 }
@@ -251,10 +251,10 @@ export type SkillOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   level?: Prisma.SortOrder
   projectExperience?: Prisma.SortOrder
   lastUsedYear?: Prisma.SortOrder
-  summary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projects?: Prisma.ProjectOrderByRelationAggregateInput
 }
@@ -266,10 +266,10 @@ export type SkillWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
   name?: Prisma.StringFilter<"Skill"> | string
   category?: Prisma.EnumSkillCategoryFilter<"Skill"> | $Enums.SkillCategory
+  icon?: Prisma.StringFilter<"Skill"> | string
   level?: Prisma.EnumSkillLevelFilter<"Skill"> | $Enums.SkillLevel
   projectExperience?: Prisma.IntFilter<"Skill"> | number
   lastUsedYear?: Prisma.IntFilter<"Skill"> | number
-  summary?: Prisma.StringFilter<"Skill"> | string
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   projects?: Prisma.ProjectListRelationFilter
 }, "id">
@@ -278,10 +278,10 @@ export type SkillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   level?: Prisma.SortOrder
   projectExperience?: Prisma.SortOrder
   lastUsedYear?: Prisma.SortOrder
-  summary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.SkillCountOrderByAggregateInput
   _avg?: Prisma.SkillAvgOrderByAggregateInput
@@ -297,10 +297,10 @@ export type SkillScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   name?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   category?: Prisma.EnumSkillCategoryWithAggregatesFilter<"Skill"> | $Enums.SkillCategory
+  icon?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   level?: Prisma.EnumSkillLevelWithAggregatesFilter<"Skill"> | $Enums.SkillLevel
   projectExperience?: Prisma.IntWithAggregatesFilter<"Skill"> | number
   lastUsedYear?: Prisma.IntWithAggregatesFilter<"Skill"> | number
-  summary?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
 }
 
@@ -308,10 +308,10 @@ export type SkillCreateInput = {
   id?: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt?: Date | string
   projects?: Prisma.ProjectCreateNestedManyWithoutSkillsInput
 }
@@ -320,10 +320,10 @@ export type SkillUncheckedCreateInput = {
   id?: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutSkillsInput
 }
@@ -332,10 +332,10 @@ export type SkillUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUpdateManyWithoutSkillsNestedInput
 }
@@ -344,10 +344,10 @@ export type SkillUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutSkillsNestedInput
 }
@@ -356,10 +356,10 @@ export type SkillCreateManyInput = {
   id?: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt?: Date | string
 }
 
@@ -367,10 +367,10 @@ export type SkillUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -378,10 +378,10 @@ export type SkillUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -399,10 +399,10 @@ export type SkillCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   level?: Prisma.SortOrder
   projectExperience?: Prisma.SortOrder
   lastUsedYear?: Prisma.SortOrder
-  summary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -415,10 +415,10 @@ export type SkillMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   level?: Prisma.SortOrder
   projectExperience?: Prisma.SortOrder
   lastUsedYear?: Prisma.SortOrder
-  summary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -426,10 +426,10 @@ export type SkillMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   level?: Prisma.SortOrder
   projectExperience?: Prisma.SortOrder
   lastUsedYear?: Prisma.SortOrder
-  summary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -488,10 +488,10 @@ export type SkillCreateWithoutProjectsInput = {
   id?: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt?: Date | string
 }
 
@@ -499,10 +499,10 @@ export type SkillUncheckedCreateWithoutProjectsInput = {
   id?: string
   name: string
   category: $Enums.SkillCategory
+  icon: string
   level: $Enums.SkillLevel
   projectExperience: number
   lastUsedYear: number
-  summary: string
   createdAt?: Date | string
 }
 
@@ -534,10 +534,10 @@ export type SkillScalarWhereInput = {
   id?: Prisma.StringFilter<"Skill"> | string
   name?: Prisma.StringFilter<"Skill"> | string
   category?: Prisma.EnumSkillCategoryFilter<"Skill"> | $Enums.SkillCategory
+  icon?: Prisma.StringFilter<"Skill"> | string
   level?: Prisma.EnumSkillLevelFilter<"Skill"> | $Enums.SkillLevel
   projectExperience?: Prisma.IntFilter<"Skill"> | number
   lastUsedYear?: Prisma.IntFilter<"Skill"> | number
-  summary?: Prisma.StringFilter<"Skill"> | string
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
 }
 
@@ -545,10 +545,10 @@ export type SkillUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -556,10 +556,10 @@ export type SkillUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -567,10 +567,10 @@ export type SkillUncheckedUpdateManyWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumSkillLevelFieldUpdateOperationsInput | $Enums.SkillLevel
   projectExperience?: Prisma.IntFieldUpdateOperationsInput | number
   lastUsedYear?: Prisma.IntFieldUpdateOperationsInput | number
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -609,10 +609,10 @@ export type SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   category?: boolean
+  icon?: boolean
   level?: boolean
   projectExperience?: boolean
   lastUsedYear?: boolean
-  summary?: boolean
   createdAt?: boolean
   projects?: boolean | Prisma.Skill$projectsArgs<ExtArgs>
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
@@ -622,10 +622,10 @@ export type SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   category?: boolean
+  icon?: boolean
   level?: boolean
   projectExperience?: boolean
   lastUsedYear?: boolean
-  summary?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["skill"]>
 
@@ -633,10 +633,10 @@ export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   category?: boolean
+  icon?: boolean
   level?: boolean
   projectExperience?: boolean
   lastUsedYear?: boolean
-  summary?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["skill"]>
 
@@ -644,14 +644,14 @@ export type SkillSelectScalar = {
   id?: boolean
   name?: boolean
   category?: boolean
+  icon?: boolean
   level?: boolean
   projectExperience?: boolean
   lastUsedYear?: boolean
-  summary?: boolean
   createdAt?: boolean
 }
 
-export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "level" | "projectExperience" | "lastUsedYear" | "summary" | "createdAt", ExtArgs["result"]["skill"]>
+export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "icon" | "level" | "projectExperience" | "lastUsedYear" | "createdAt", ExtArgs["result"]["skill"]>
 export type SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   projects?: boolean | Prisma.Skill$projectsArgs<ExtArgs>
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
@@ -668,10 +668,10 @@ export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     name: string
     category: $Enums.SkillCategory
+    icon: string
     level: $Enums.SkillLevel
     projectExperience: number
     lastUsedYear: number
-    summary: string
     createdAt: Date
   }, ExtArgs["result"]["skill"]>
   composites: {}
@@ -1100,10 +1100,10 @@ export interface SkillFieldRefs {
   readonly id: Prisma.FieldRef<"Skill", 'String'>
   readonly name: Prisma.FieldRef<"Skill", 'String'>
   readonly category: Prisma.FieldRef<"Skill", 'SkillCategory'>
+  readonly icon: Prisma.FieldRef<"Skill", 'String'>
   readonly level: Prisma.FieldRef<"Skill", 'SkillLevel'>
   readonly projectExperience: Prisma.FieldRef<"Skill", 'Int'>
   readonly lastUsedYear: Prisma.FieldRef<"Skill", 'Int'>
-  readonly summary: Prisma.FieldRef<"Skill", 'String'>
   readonly createdAt: Prisma.FieldRef<"Skill", 'DateTime'>
 }
     

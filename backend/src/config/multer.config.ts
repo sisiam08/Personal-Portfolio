@@ -1,9 +1,6 @@
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { cloudinaryUpload } from "./cloudinary.config";
-import createAppError from "../errors/appError";
-import { Status } from "../errors/httpStatus";
-import { handleMulterErrors } from "../errors/multerErrors";
 
 const ALLOWED_MIME_TYPES = [
   "image/jpeg",
@@ -21,13 +18,12 @@ const ALLOWED_MIME_TYPES = [
 const FILE_SIZE_LIMIT = 50 * 1024 * 1024;
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinaryUpload,
-  params: async (req, file) => {
+  cloudinary: cloudinaryUpload as any,
+  params: async (req: any, file: any) => {
     try {
       if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
-        throw createAppError(
-          `File type not allowed. Allowed types: ${ALLOWED_MIME_TYPES.join(", ")}`,
-          Status.BAD_REQUEST,
+        throw new Error(
+          `File type not allowed. Allowed types: ${ALLOWED_MIME_TYPES.join(", ")}`
         );
       }
 
@@ -61,7 +57,7 @@ const storage = new CloudinaryStorage({
                 : "images";
 
       return {
-        folder: `skillnack/${folder}`,
+        folder: `personalPortfolio/${folder}`,
         public_id: uniqueName,
         resource_type: "auto",
         timeout: 120000, // 2 minutes timeout for large files
@@ -82,14 +78,13 @@ export const upload = multer({
   fileFilter: (req, file, cb) => {
     if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
       return cb(
-        createAppError(
-          `File type not allowed. Allowed types: images, PDFs, documents, PowerPoints, and text files`,
-          Status.BAD_REQUEST,
-        ) as any,
+        new Error(
+          `File type not allowed. Allowed types: images, PDFs, documents, PowerPoints, and text files`
+        )
       );
     }
     cb(null, true);
   },
 });
 
-export { storage, handleMulterErrors };
+export { storage };
