@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "../generated/prisma/client";
+import { ZodError } from "zod";
 
 function globalErrorHandler(
   err: any,
@@ -7,10 +8,18 @@ function globalErrorHandler(
   res: Response,
   next: NextFunction,
 ) {
-  let statusCode = 500;
-  let errorMessage = "Internal server error!";
+  let statusCode = err.statusCode || 500;
+  let errorMessage = err.message || "Internal server error!";
+  let errorDetails = null;
 
-  if (err instanceof Prisma.PrismaClientValidationError) {
+  if (err instanceof ZodError) {
+    statusCode = 400;
+    errorMessage = "Validation Error";
+    errorDetails = err.issues.map(issue => ({
+      field: issue.path[issue.path.length - 1],
+      message: issue.message
+    }));
+  } else if (err instanceof Prisma.PrismaClientValidationError) {
     statusCode = 400;
     errorMessage = "You provide incorrect field type or missing fields!";
   } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -36,6 +45,7 @@ function globalErrorHandler(
   res.status(statusCode).json({
     success: false,
     message: errorMessage,
+    ...(errorDetails && { errors: errorDetails })
   });
 }
 

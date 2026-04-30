@@ -5,8 +5,8 @@ export const createEducationSchema = z.object({
     institute: z.string({ message: "Institute name is required" }),
     degree: z.string({ message: "Degree is required" }),
     field: z.string({ message: "Field of study is required" }),
-    startYear: z.number().int().min(1950, "Valid start year required").max(new Date().getFullYear(), "Start year cannot be in the future"),
-    endYear: z.number().int().optional(),
+    startYear: z.coerce.number().int().min(1950, "Valid start year required").max(new Date().getFullYear(), "Start year cannot be in the future"),
+    endYear: z.coerce.number().int().optional(),
   })
 });
 
@@ -15,8 +15,8 @@ export const updateEducationSchema = z.object({
     institute: z.string().optional(),
     degree: z.string().optional(),
     field: z.string().optional(),
-    startYear: z.number().int().min(1950).max(new Date().getFullYear()).optional(),
-    endYear: z.number().int().optional(),
+    startYear: z.coerce.number().int().min(1950).max(new Date().getFullYear()).optional(),
+    endYear: z.coerce.number().int().optional(),
   })
 });
 

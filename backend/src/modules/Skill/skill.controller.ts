@@ -7,11 +7,13 @@ import { SkillCreateInput, SkillUpdateInput } from "../../generated/prisma/model
 const createSkill = catchAsync(async (req: Request, res: Response) => {
   const file = req.file as Express.Multer.File;
 
+  if (!file) {
+    throw new Error("Icon is required");
+  }
+
   const skillData : SkillCreateInput = { ...req.body };
 
-  if (file) {
-    skillData.icon = (file as any).path || (file as any).url;
-  }
+  skillData.icon = (file as any).path || (file as any).url;
 
   const result = await SkillService.createSkill(skillData);
 

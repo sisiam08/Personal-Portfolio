@@ -34,15 +34,9 @@ export const uploadFileToCloudinary = async (
     extension;
 
   const folder =
-    extension === ".pdf"
-      ? "pdfs"
-      : extension === ".txt"
-        ? "texts"
-        : extension === ".ppt" || extension === ".pptx"
-          ? "presentations"
-          : extension === ".doc" || extension === ".docx"
-            ? "documents"
-            : "images";
+    extension === ".png" || extension === ".jpg" || extension === ".jpeg" || extension === ".webp" || extension === ".svg"
+      ? "images"
+      : "others";
 
   return new Promise((resolve, reject) => {
     cloudinary.uploader

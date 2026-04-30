@@ -8,7 +8,9 @@ const validateRequest = (schema: ZodObject) => {
     // but typically validating req.body is sufficient. For multer + zod, we only validate the text fields.
     if (req.body && req.body.data && typeof req.body.data === 'string') {
         try {
-            req.body = JSON.parse(req.body.data);
+            const parsedData = JSON.parse(req.body.data);
+            req.body = { ...req.body, ...parsedData };
+            delete req.body.data;
         } catch(e) {
             // let zod fail
         }

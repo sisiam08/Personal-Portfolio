@@ -10,8 +10,8 @@ export const createProjectSchema = z.object({
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
     status: z.nativeEnum(ProjectStatus, { message: "Status is required" } as any),
-    featured: z.boolean().optional(),
-    skills: z.array(z.string()).optional(), // Array of skill IDs
+    featured: z.coerce.boolean().optional(),
+    skills: z.union([z.array(z.string()), z.string()]).transform(val => Array.isArray(val) ? val : [val]).optional(), // Support single string or array of skills
   })
 });
 
@@ -24,8 +24,8 @@ export const updateProjectSchema = z.object({
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
     status: z.nativeEnum(ProjectStatus).optional(),
-    featured: z.boolean().optional(),
-    skills: z.array(z.string()).optional(),
+    featured: z.coerce.boolean().optional(),
+    skills: z.union([z.array(z.string()), z.string()]).transform(val => Array.isArray(val) ? val : [val]).optional(),
   })
 });
 
