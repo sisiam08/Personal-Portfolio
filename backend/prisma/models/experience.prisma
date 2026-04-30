@@ -7,4 +7,6 @@ model Experience {
   startDate   DateTime
   endDate     DateTime?
   current     Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
 }

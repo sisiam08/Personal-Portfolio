@@ -1,0 +1,13 @@
+#backend
+- project setup with prisma (done)
+- implement better auth
+- setup with express
+- setup moduler structure
+- error handling
+- middleware
+- modules
+  - user
+  - project
+  - skill
+  - experience
+  - message

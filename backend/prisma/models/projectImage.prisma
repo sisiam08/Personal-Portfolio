@@ -2,6 +2,6 @@ model ProjectImage {
   id        String   @id @default(uuid())
   imageUrl  String
 
-  project   Project  @relation(fields: [projectId], references: [id])
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
 }
