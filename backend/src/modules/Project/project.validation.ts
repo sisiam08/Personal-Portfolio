@@ -9,6 +9,7 @@ export const createProjectSchema = z.object({
     solution: z.string({ message: "Solution statement is required" }),
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
+    image: z.string().optional(),
     status: z.nativeEnum(ProjectStatus, { message: "Status is required" } as any),
     featured: z.coerce.boolean().optional(),
     skills: z.union([z.array(z.string()), z.string()]).transform(val => Array.isArray(val) ? val : [val]).optional(), // Support single string or array of skills
@@ -23,6 +24,7 @@ export const updateProjectSchema = z.object({
     solution: z.string().optional(),
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
+    image: z.string().optional(),
     status: z.nativeEnum(ProjectStatus).optional(),
     featured: z.coerce.boolean().optional(),
     skills: z.union([z.array(z.string()), z.string()]).transform(val => Array.isArray(val) ? val : [val]).optional(),

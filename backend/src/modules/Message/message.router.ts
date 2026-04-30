@@ -10,14 +10,10 @@ const router = Router();
 router.post(
   "/",
   validateRequest(MessageValidation.createMessageSchema as any),
-  MessageController.createMessage
+  MessageController.createMessage,
 );
 
 // Admin route to view messages
-router.get(
-  "/",
-  auth_middleware(),
-  MessageController.getAllMessages
-);
+router.get("/", auth_middleware(), MessageController.getAllMessages);
 
 export const MessageRoutes = router;

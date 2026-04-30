@@ -1162,6 +1162,8 @@ export const ProjectScalarFieldEnum = {
   description: 'description',
   problem: 'problem',
   solution: 'solution',
+  challenges: 'challenges',
+  futurePlan: 'futurePlan',
   githubUrl: 'githubUrl',
   liveUrl: 'liveUrl',
   status: 'status',

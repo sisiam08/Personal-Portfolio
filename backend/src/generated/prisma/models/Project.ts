@@ -31,6 +31,8 @@ export type ProjectMinAggregateOutputType = {
   description: string | null
   problem: string | null
   solution: string | null
+  challenges: string | null
+  futurePlan: string | null
   githubUrl: string | null
   liveUrl: string | null
   status: $Enums.ProjectStatus | null
@@ -46,6 +48,8 @@ export type ProjectMaxAggregateOutputType = {
   description: string | null
   problem: string | null
   solution: string | null
+  challenges: string | null
+  futurePlan: string | null
   githubUrl: string | null
   liveUrl: string | null
   status: $Enums.ProjectStatus | null
@@ -61,6 +65,8 @@ export type ProjectCountAggregateOutputType = {
   description: number
   problem: number
   solution: number
+  challenges: number
+  futurePlan: number
   githubUrl: number
   liveUrl: number
   status: number
@@ -78,6 +84,8 @@ export type ProjectMinAggregateInputType = {
   description?: true
   problem?: true
   solution?: true
+  challenges?: true
+  futurePlan?: true
   githubUrl?: true
   liveUrl?: true
   status?: true
@@ -93,6 +101,8 @@ export type ProjectMaxAggregateInputType = {
   description?: true
   problem?: true
   solution?: true
+  challenges?: true
+  futurePlan?: true
   githubUrl?: true
   liveUrl?: true
   status?: true
@@ -108,6 +118,8 @@ export type ProjectCountAggregateInputType = {
   description?: true
   problem?: true
   solution?: true
+  challenges?: true
+  futurePlan?: true
   githubUrl?: true
   liveUrl?: true
   status?: true
@@ -196,6 +208,8 @@ export type ProjectGroupByOutputType = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl: string | null
   liveUrl: string | null
   status: $Enums.ProjectStatus
@@ -232,6 +246,8 @@ export type ProjectWhereInput = {
   description?: Prisma.StringFilter<"Project"> | string
   problem?: Prisma.StringFilter<"Project"> | string
   solution?: Prisma.StringFilter<"Project"> | string
+  challenges?: Prisma.StringFilter<"Project"> | string
+  futurePlan?: Prisma.StringFilter<"Project"> | string
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
@@ -248,6 +264,8 @@ export type ProjectOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   problem?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  challenges?: Prisma.SortOrder
+  futurePlan?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   liveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -267,6 +285,8 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Project"> | string
   problem?: Prisma.StringFilter<"Project"> | string
   solution?: Prisma.StringFilter<"Project"> | string
+  challenges?: Prisma.StringFilter<"Project"> | string
+  futurePlan?: Prisma.StringFilter<"Project"> | string
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
@@ -283,6 +303,8 @@ export type ProjectOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   problem?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  challenges?: Prisma.SortOrder
+  futurePlan?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   liveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -304,6 +326,8 @@ export type ProjectScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Project"> | string
   problem?: Prisma.StringWithAggregatesFilter<"Project"> | string
   solution?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  challenges?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  futurePlan?: Prisma.StringWithAggregatesFilter<"Project"> | string
   githubUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   liveUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Project"> | $Enums.ProjectStatus
@@ -319,6 +343,8 @@ export type ProjectCreateInput = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl?: string | null
   liveUrl?: string | null
   status: $Enums.ProjectStatus
@@ -335,6 +361,8 @@ export type ProjectUncheckedCreateInput = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl?: string | null
   liveUrl?: string | null
   status: $Enums.ProjectStatus
@@ -351,6 +379,8 @@ export type ProjectUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -367,6 +397,8 @@ export type ProjectUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -383,6 +415,8 @@ export type ProjectCreateManyInput = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl?: string | null
   liveUrl?: string | null
   status: $Enums.ProjectStatus
@@ -398,6 +432,8 @@ export type ProjectUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -413,6 +449,8 @@ export type ProjectUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -428,6 +466,8 @@ export type ProjectCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   problem?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  challenges?: Prisma.SortOrder
+  futurePlan?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -443,6 +483,8 @@ export type ProjectMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   problem?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  challenges?: Prisma.SortOrder
+  futurePlan?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -458,6 +500,8 @@ export type ProjectMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   problem?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  challenges?: Prisma.SortOrder
+  futurePlan?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -529,6 +573,8 @@ export type ProjectCreateWithoutSkillsInput = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl?: string | null
   liveUrl?: string | null
   status: $Enums.ProjectStatus
@@ -544,6 +590,8 @@ export type ProjectUncheckedCreateWithoutSkillsInput = {
   description: string
   problem: string
   solution: string
+  challenges: string
+  futurePlan: string
   githubUrl?: string | null
   liveUrl?: string | null
   status: $Enums.ProjectStatus
@@ -583,6 +631,8 @@ export type ProjectScalarWhereInput = {
   description?: Prisma.StringFilter<"Project"> | string
   problem?: Prisma.StringFilter<"Project"> | string
   solution?: Prisma.StringFilter<"Project"> | string
+  challenges?: Prisma.StringFilter<"Project"> | string
+  futurePlan?: Prisma.StringFilter<"Project"> | string
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
@@ -598,6 +648,8 @@ export type ProjectUpdateWithoutSkillsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -613,6 +665,8 @@ export type ProjectUncheckedUpdateWithoutSkillsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -628,6 +682,8 @@ export type ProjectUncheckedUpdateManyWithoutSkillsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   problem?: Prisma.StringFieldUpdateOperationsInput | string
   solution?: Prisma.StringFieldUpdateOperationsInput | string
+  challenges?: Prisma.StringFieldUpdateOperationsInput | string
+  futurePlan?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
@@ -674,6 +730,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   problem?: boolean
   solution?: boolean
+  challenges?: boolean
+  futurePlan?: boolean
   githubUrl?: boolean
   liveUrl?: boolean
   status?: boolean
@@ -691,6 +749,8 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   problem?: boolean
   solution?: boolean
+  challenges?: boolean
+  futurePlan?: boolean
   githubUrl?: boolean
   liveUrl?: boolean
   status?: boolean
@@ -706,6 +766,8 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   problem?: boolean
   solution?: boolean
+  challenges?: boolean
+  futurePlan?: boolean
   githubUrl?: boolean
   liveUrl?: boolean
   status?: boolean
@@ -721,6 +783,8 @@ export type ProjectSelectScalar = {
   description?: boolean
   problem?: boolean
   solution?: boolean
+  challenges?: boolean
+  futurePlan?: boolean
   githubUrl?: boolean
   liveUrl?: boolean
   status?: boolean
@@ -729,7 +793,7 @@ export type ProjectSelectScalar = {
   createdAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "problem" | "solution" | "githubUrl" | "liveUrl" | "status" | "featured" | "image" | "createdAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "problem" | "solution" | "challenges" | "futurePlan" | "githubUrl" | "liveUrl" | "status" | "featured" | "image" | "createdAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   skills?: boolean | Prisma.Project$skillsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -749,6 +813,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string
     problem: string
     solution: string
+    challenges: string
+    futurePlan: string
     githubUrl: string | null
     liveUrl: string | null
     status: $Enums.ProjectStatus
@@ -1185,6 +1251,8 @@ export interface ProjectFieldRefs {
   readonly description: Prisma.FieldRef<"Project", 'String'>
   readonly problem: Prisma.FieldRef<"Project", 'String'>
   readonly solution: Prisma.FieldRef<"Project", 'String'>
+  readonly challenges: Prisma.FieldRef<"Project", 'String'>
+  readonly futurePlan: Prisma.FieldRef<"Project", 'String'>
   readonly githubUrl: Prisma.FieldRef<"Project", 'String'>
   readonly liveUrl: Prisma.FieldRef<"Project", 'String'>
   readonly status: Prisma.FieldRef<"Project", 'ProjectStatus'>
