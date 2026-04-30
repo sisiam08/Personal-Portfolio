@@ -1,19 +1,33 @@
-import { Project, ProjectStatus } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
 
 const generateSlug = (title: string) => {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 };
 
 const createProject = async (payload: any) => {
   const { skills, ...projectData } = payload;
-  
+
   const slug = generateSlug(projectData.title);
 
   // Handle unique slug
+  const existingSlugs = await prisma.project.findMany({
+    where: {
+      slug: {
+        startsWith: slug,
+      },
+    },
+    select: { slug: true },
+  });
+
+  const slugSet = new Set(existingSlugs.map((s) => s.slug));
+
   let finalSlug = slug;
   let counter = 1;
-  while (await prisma.project.findUnique({ where: { slug: finalSlug } })) {
+
+  while (slugSet.has(finalSlug)) {
     finalSlug = `${slug}-${counter}`;
     counter++;
   }
@@ -22,16 +36,16 @@ const createProject = async (payload: any) => {
     data: {
       ...projectData,
       slug: finalSlug,
-      ...(skills && skills.length > 0 && {
-        skills: {
-          connect: skills.map((id: string) => ({ id }))
-        }
-      })
+      ...(skills &&
+        skills.length > 0 && {
+          skills: {
+            connect: skills.map((id: string) => ({ id })),
+          },
+        }),
     },
     include: {
       skills: true,
-      images: true,
-    }
+    },
   });
 
   return result;
@@ -47,11 +61,10 @@ const getAllProjects = async (query: Record<string, unknown>) => {
     take: limit,
     include: {
       skills: true,
-      images: true,
     },
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: "desc",
+    },
   });
 
   const total = await prisma.project.count();
@@ -61,9 +74,9 @@ const getAllProjects = async (query: Record<string, unknown>) => {
       page,
       limit,
       total,
-      totalPage: Math.ceil(total / limit)
+      totalPage: Math.ceil(total / limit),
     },
-    data: result
+    data: result,
   };
 };
 
@@ -72,18 +85,17 @@ const getProjectBySlug = async (slug: string) => {
     where: { slug },
     include: {
       skills: true,
-      images: true,
-    }
+    },
   });
   return result;
 };
 
 const updateProject = async (id: string, payload: any) => {
   const { skills, ...projectData } = payload;
-  
+
   if (projectData.title) {
     projectData.slug = generateSlug(projectData.title);
-    // Note: in a real app you might want to check if the new slug exists, 
+    // Note: in a real app you might want to check if the new slug exists,
     // but ignoring for simplicity unless required.
   }
 
@@ -93,22 +105,24 @@ const updateProject = async (id: string, payload: any) => {
       ...projectData,
       ...(skills && {
         skills: {
-          set: Object.keys(skills).length > 0 ? skills.map((skillId: string) => ({ id: skillId })) : []
-        }
-      })
+          set:
+            Object.keys(skills).length > 0
+              ? skills.map((skillId: string) => ({ id: skillId }))
+              : [],
+        },
+      }),
     },
     include: {
       skills: true,
-      images: true,
-    }
+    },
   });
-  
+
   return result;
 };
 
 const deleteProject = async (id: string) => {
   const result = await prisma.project.delete({
-    where: { id }
+    where: { id },
   });
   return result;
 };
@@ -118,5 +132,5 @@ export const ProjectService = {
   getAllProjects,
   getProjectBySlug,
   updateProject,
-  deleteProject
+  deleteProject,
 };

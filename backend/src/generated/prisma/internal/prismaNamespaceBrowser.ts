@@ -55,7 +55,6 @@ export const ModelName = {
   Experience: 'Experience',
   Message: 'Message',
   Project: 'Project',
-  ProjectImage: 'ProjectImage',
   Skill: 'Skill',
   User: 'User',
   Session: 'Session',
@@ -128,19 +127,11 @@ export const ProjectScalarFieldEnum = {
   liveUrl: 'liveUrl',
   status: 'status',
   featured: 'featured',
+  image: 'image',
   createdAt: 'createdAt'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
-
-
-export const ProjectImageScalarFieldEnum = {
-  id: 'id',
-  imageUrl: 'imageUrl',
-  projectId: 'projectId'
-} as const
-
-export type ProjectImageScalarFieldEnum = (typeof ProjectImageScalarFieldEnum)[keyof typeof ProjectImageScalarFieldEnum]
 
 
 export const SkillScalarFieldEnum = {

@@ -12,9 +12,9 @@ model Project {
 
   status      ProjectStatus
   featured    Boolean       @default(false)
+  image       String
 
   createdAt   DateTime      @default(now())
 
-  images      ProjectImage[]
   skills      Skill[]
 }

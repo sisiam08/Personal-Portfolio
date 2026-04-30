@@ -62,11 +62,6 @@ export type Message = Prisma.MessageModel
  */
 export type Project = Prisma.ProjectModel
 /**
- * Model ProjectImage
- * 
- */
-export type ProjectImage = Prisma.ProjectImageModel
-/**
  * Model Skill
  * 
  */

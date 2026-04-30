@@ -2,9 +2,23 @@ import { Request, Response } from "express";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { ProjectService } from "./project.service";
+import {
+  ProjectCreateInput,
+  ProjectUpdateInput,
+} from "../../generated/prisma/models";
 
 const createProject = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProjectService.createProject(req.body);
+  const file = req.file as Express.Multer.File;
+
+  if (!file) {
+    throw new Error("Image is required");
+  }
+
+  const projectData: ProjectCreateInput = { ...req.body };
+
+  projectData.image = (file as any).path || (file as any).url;
+
+  const result = await ProjectService.createProject(projectData);
 
   sendResponse(res, {
     statusCode: 201,
@@ -26,7 +40,9 @@ const getAllProjects = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getProjectBySlug = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProjectService.getProjectBySlug(req.params.slug as string);
+  const result = await ProjectService.getProjectBySlug(
+    req.params.slug as string,
+  );
 
   sendResponse(res, {
     statusCode: result ? 200 : 404,
@@ -37,7 +53,18 @@ const getProjectBySlug = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateProject = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProjectService.updateProject(req.params.id as string, req.body);
+  const file = req.file as Express.Multer.File;
+
+  const projectData: ProjectUpdateInput = { ...req.body };
+
+  if (file) {
+    projectData.image = (file as any).path || (file as any).url;
+  }
+
+  const result = await ProjectService.updateProject(
+    req.params.id as string,
+    projectData,
+  );
 
   sendResponse(res, {
     statusCode: 200,
