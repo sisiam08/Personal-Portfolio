@@ -2,13 +2,17 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { UserRole } from "../generated/prisma/enums";
+import config from "../config";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  baseURL: process.env.APP_URL!,
-  trustedOrigins: [process.env.APP_URL!, process.env.BETTER_AUTH_URL!],
+  baseURL: config.betterAuth.betterAuthUrl,
+  trustedOrigins: [config.appUrl!, config.betterAuth.betterAuthUrl!],
+  emailAndPassword: {
+    enabled: true,
+  },
   advanced: {
     useSecureCookies: true,
     defaultCookieAttributes: {
@@ -26,15 +30,15 @@ export const auth = betterAuth({
       },
       designation: {
         type: "string",
-        required: true,
+        required: false,
       },
       bio: {
         type: "string",
-        required: true,
+        required: false,
       },
       about: {
         type: "string",
-        required: true,
+        required: false,
       },
       phone: {
         type: "string",
@@ -58,7 +62,7 @@ export const auth = betterAuth({
       },
       resumeUrl: {
         type: "string",
-        required: true,
+        required: false,
       },
     },
   },
