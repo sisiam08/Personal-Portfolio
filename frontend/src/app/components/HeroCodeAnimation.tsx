@@ -7,7 +7,7 @@ interface HeroCodeAnimationProps {
   bio: string;
 }
 
-type TokenType = "tag" | "attr" | "value" | "text" | "punct" | "plain";
+type TokenType = "tag" | "attr" | "value" | "text" | "punct" | "plain" | "nameText";
 
 interface Token {
   text: string;
@@ -31,7 +31,7 @@ function buildLines(name: string, bio: string): Token[][] {
       { text: "<", type: "punct" },
       { text: "h1", type: "tag" },
       { text: ">", type: "punct" },
-      { text: name, type: "text" },
+      { text: name, type: "nameText" },
       { text: "</", type: "punct" },
       { text: "h1", type: "tag" },
       { text: ">", type: "punct" },
@@ -55,12 +55,13 @@ function buildLines(name: string, bio: string): Token[][] {
 }
 
 const STYLE_MAP: Record<TokenType, { cls: string; shadow: string }> = {
-  tag:   { cls: "text-[#4a8c57]",  shadow: "none"                             }, // dark muted green
-  attr:  { cls: "text-[#ffab70]",  shadow: "0 0 10px rgba(255,171,112,0.45)" }, // orange
-  value: { cls: "text-[#a5d6ff]",  shadow: "0 0 10px rgba(165,214,255,0.4)"  }, // light blue
-  text:  { cls: "text-[#8d96a0]",  shadow: "none"                             }, // muted slate
-  punct: { cls: "text-[#8b949e]",  shadow: "none"                             }, // muted grey
-  plain: { cls: "text-transparent", shadow: "none"                             },
+  tag: { cls: "text-[#4a8c57]", shadow: "none" }, // dark muted green
+  attr: { cls: "text-[#ffab70]", shadow: "0 0 10px rgba(255,171,112,0.45)" }, // orange
+  value: { cls: "text-[#a5d6ff]", shadow: "0 0 10px rgba(165,214,255,0.4)" }, // light blue
+  nameText: { cls: "text-[#a5d6ff] font-bold", shadow: "0 0 6px rgba(165,214,255,0.4)" }, // highlighted string values
+  text: { cls: "text-[#8d96a0]", shadow: "none" }, // muted slate
+  punct: { cls: "text-[#8b949e]", shadow: "none" }, // muted grey
+  plain: { cls: "text-transparent", shadow: "none" },
 };
 
 interface FlatChar {
@@ -75,14 +76,20 @@ interface HeroCodeAnimationProps {
   onComplete?: () => void;
 }
 
-export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAnimationProps) {
+export default function HeroCodeAnimation({
+  name,
+  bio,
+  onComplete,
+}: HeroCodeAnimationProps) {
   const lines = buildLines(name, bio);
 
   // Flatten all chars while keeping track of which line each belongs to
   const allChars: FlatChar[] = lines.flatMap((lineTokens, lineIndex) =>
     lineTokens.flatMap((token) =>
-      token.text.split("").map((char) => ({ char, type: token.type, lineIndex }))
-    )
+      token.text
+        .split("")
+        .map((char) => ({ char, type: token.type, lineIndex })),
+    ),
   );
 
   const [visibleCount, setVisibleCount] = useState(0);
@@ -99,7 +106,7 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
           setDone(true);
           if (onComplete) onComplete();
         }
-      }, 20);
+      }, 65);
       return () => clearInterval(interval);
     }, 300);
     return () => clearTimeout(startTimer);
@@ -109,7 +116,7 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
   // Determine which line the cursor is currently on
   const activeLine = done
     ? lines.length - 1
-    : allChars[Math.max(0, visibleCount - 1)]?.lineIndex ?? 0;
+    : (allChars[Math.max(0, visibleCount - 1)]?.lineIndex ?? 0);
 
   // Build per-line rendered segments from visible chars
   type Segment = { text: string; type: TokenType };
@@ -128,7 +135,8 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
     <div
       className="rounded-xl overflow-hidden relative"
       style={{
-        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%)",
+        background:
+          "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%)",
         borderTop: "1px solid rgba(255, 255, 255, 0.2)",
         borderLeft: "1px solid rgba(255, 255, 255, 0.2)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
@@ -142,7 +150,7 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
       <div className="px-0 py-5">
         {lines.map((_, lineIndex) => {
           const segs = renderedLines[lineIndex];
-          const isActive = lineIndex === activeLine && !done;
+          const isActive = lineIndex === activeLine;
           const lineNumber = lineIndex + 1;
 
           return (
@@ -150,9 +158,7 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
               key={lineIndex}
               className="flex items-start leading-[1.85] transition-colors duration-200"
               style={{
-                background: isActive
-                  ? "rgba(192,193,255,0.04)"
-                  : "transparent",
+                background: isActive ? "rgba(192,193,255,0.04)" : "transparent",
                 borderLeft: isActive
                   ? "2px solid rgba(192,193,255,0.5)"
                   : "2px solid transparent",
@@ -162,7 +168,9 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
               <span
                 className="select-none text-right font-mono shrink-0 px-4"
                 style={{
-                  color: isActive ? "rgba(192,193,255,0.6)" : "rgba(255,255,255,0.18)",
+                  color: isActive
+                    ? "rgba(192,193,255,0.6)"
+                    : "rgba(255,255,255,0.18)",
                   fontSize: "0.9rem",
                   minWidth: "2.5rem",
                   paddingTop: "0",
@@ -194,7 +202,9 @@ export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAni
                     className={STYLE_MAP[seg.type].cls}
                     style={{ textShadow: STYLE_MAP[seg.type].shadow }}
                   >
-                    {seg.type === "plain" ? "\u00A0".repeat(seg.text.length) : seg.text}
+                    {seg.type === "plain"
+                      ? "\u00A0".repeat(seg.text.length)
+                      : seg.text}
                   </span>
                 ))}
 

@@ -9,7 +9,11 @@ const ROLES = [
   "Business-Oriented Developer",
 ];
 
-export default function TypewriterRole({ startAnimation = true }: { startAnimation?: boolean }) {
+export default function TypewriterRole({
+  startAnimation = true,
+}: {
+  startAnimation?: boolean;
+}) {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -27,7 +31,7 @@ export default function TypewriterRole({ startAnimation = true }: { startAnimati
       setText(
         isDeleting
           ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1)
+          : fullText.substring(0, text.length + 1),
       );
 
       setTypingSpeed(isDeleting ? 40 : 80);
@@ -49,26 +53,23 @@ export default function TypewriterRole({ startAnimation = true }: { startAnimati
   }, [text, isDeleting, loopNum, typingSpeed, startAnimation]);
 
   return (
-    <div 
-      className={`flex items-center gap-3 text-xl md:text-2xl font-medium text-on-surface-variant mb-8 transition-opacity duration-1000 ${
+    <div
+      className={`flex items-center gap-3 text-lg md:text-xl font-medium text-on-surface-variant mb-8 transition-opacity duration-1000 ${
         startAnimation ? "opacity-100" : "opacity-0"
       }`}
     >
+      {/* Static */}
+      <span className="text-on-surface-variant/70">I am a</span>
 
-  {/* Static */}
-  <span className="text-on-surface-variant/70">I am a</span>
+      {/* Animated */}
+      <span className="relative font-bold tracking-wide">
+        <span className="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent animate-gradient-text">
+          {text}
+        </span>
 
-  {/* Animated */}
-  <span className="relative font-bold tracking-wide">
-    
-    <span className="bg-gradient-to-r from-primary via-secondary to-primary-container bg-clip-text text-transparent animate-gradient-text">
-      {text}
-    </span>
-
-    {/* Cursor */}
-    <span className="ml-1 inline-block w-[2px] h-[1.2em] bg-primary animate-cursor-soft" />
-  </span>
-
-</div>
+        {/* Cursor */}
+        <span className="ml-1 inline-block w-[2px] h-[1.2em] bg-primary animate-cursor-soft" />
+      </span>
+    </div>
   );
 }
