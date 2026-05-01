@@ -137,6 +137,11 @@ body {
   background: radial-gradient(circle at top left, #0b1326 0%, #060e20 100%);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  cursor: none;
+}
+
+*, *::before, *::after {
+  cursor: none !important;
 }
 
 /* Custom component classes */
@@ -179,4 +184,51 @@ body {
 
 .animate-float-delayed {
   animation: float 8s ease-in-out infinite 2s;
+}
+
+/* Hero code animation cursor */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.animate-blink-cursor {
+  animation: blinkCursor 0.75s step-start infinite;
+}
+
+/* Hero code block font */
+.hero-code-block {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* Gradient animation for text */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+/* Smooth cursor (better than blink) */
+@keyframes cursorFade {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.animate-cursor-soft {
+  animation: cursorFade 1.2s ease-in-out infinite;
 }

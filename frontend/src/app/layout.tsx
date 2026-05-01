@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import CustomCursor from "./components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "DevPortfolio | Senior Full Stack Engineer",
@@ -25,14 +26,15 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600&family=JetBrains+Mono:wght@400;500&display=swap"
         />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className="bg-background text-on-surface overflow-x-hidden">
+      <body className="bg-background text-on-surface overflow-x-hidden cursor-none">
+        <CustomCursor />
         {children}
       </body>
     </html>
