@@ -261,10 +261,10 @@ export type SkillOrderByWithRelationInput = {
 
 export type SkillWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   AND?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
   OR?: Prisma.SkillWhereInput[]
   NOT?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
-  name?: Prisma.StringFilter<"Skill"> | string
   category?: Prisma.EnumSkillCategoryFilter<"Skill"> | $Enums.SkillCategory
   icon?: Prisma.StringFilter<"Skill"> | string
   level?: Prisma.EnumSkillLevelFilter<"Skill"> | $Enums.SkillLevel
@@ -272,7 +272,7 @@ export type SkillWhereUniqueInput = Prisma.AtLeast<{
   lastUsedYear?: Prisma.IntFilter<"Skill"> | number
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   projects?: Prisma.ProjectListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type SkillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
