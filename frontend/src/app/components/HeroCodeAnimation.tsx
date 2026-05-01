@@ -69,7 +69,13 @@ interface FlatChar {
   lineIndex: number;
 }
 
-export default function HeroCodeAnimation({ name, bio }: HeroCodeAnimationProps) {
+interface HeroCodeAnimationProps {
+  name: string;
+  bio: string;
+  onComplete?: () => void;
+}
+
+export default function HeroCodeAnimation({ name, bio, onComplete }: HeroCodeAnimationProps) {
   const lines = buildLines(name, bio);
 
   // Flatten all chars while keeping track of which line each belongs to
@@ -91,6 +97,7 @@ export default function HeroCodeAnimation({ name, bio }: HeroCodeAnimationProps)
         if (indexRef.current >= allChars.length) {
           clearInterval(interval);
           setDone(true);
+          if (onComplete) onComplete();
         }
       }, 20);
       return () => clearInterval(interval);

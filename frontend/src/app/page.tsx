@@ -2,10 +2,10 @@ import { EducationService } from "../service/education.service";
 import { ProjectService } from "../service/project.service";
 import { SkillService } from "../service/skill.service";
 import { UserService } from "../service/user.service";
-import HeroCodeAnimation from "./components/HeroCodeAnimation";
+import HeroTextGroup from "./components/HeroTextGroup";
 import MagneticButton from "./components/MagneticButton";
 import Navbar from "./components/Navbar";
-import TypewriterRole from "./components/TypewriterRole";
+import ProjectShowcase from "./components/ProjectShowcase";
 
 export default async function Page() {
   const userRes = await UserService.getUserProfile();
@@ -40,9 +40,10 @@ export default async function Page() {
               Available for high-stakes projects
             </div>
 
-            <HeroCodeAnimation name={user.data.name} bio={user.data.bio} />
-
-            <TypewriterRole />
+            <HeroTextGroup
+              name={user?.data?.name || "Developer"}
+              bio={user?.data?.bio || "Loading profile..."}
+            />
 
             <MagneticButton className="glass-panel text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 architectural-tracking inline-block">
               Resume
@@ -70,7 +71,9 @@ export default async function Page() {
 
               {/* Projects */}
               <div className="absolute -top-4 -right-2 md:-right-8 glass-panel px-4 py-3 rounded-xl text-white text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105">
-                <p className="font-bold text-lg">{projects.data.data.length}+</p>
+                <p className="font-bold text-lg">
+                  {projects?.data?.data?.length || projects?.data?.length || 0}+
+                </p>
                 <p className="text-xs text-on-surface-variant">
                   Projects Built
                 </p>
@@ -78,7 +81,9 @@ export default async function Page() {
 
               {/* Technologies */}
               <div className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 glass-panel px-4 py-3 rounded-xl text-white text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105 z-10">
-                <p className="font-bold text-lg">{skills.data.length}+</p>
+                <p className="font-bold text-lg">
+                  {skills?.data?.length || 0}+
+                </p>
                 <p className="text-xs text-on-surface-variant">Technologies</p>
               </div>
 
@@ -94,8 +99,9 @@ export default async function Page() {
             </div>
           </div>
         </section>
-        {/* Bento Grid Projects */}
+        {/* Projects */}
         <section className="mb-section-gap">
+          {/* Header */}
           <div className="flex justify-between items-end mb-stack-lg">
             <div>
               <p className="text-primary font-label-caps architectural-tracking mb-2">
@@ -103,110 +109,9 @@ export default async function Page() {
               </p>
               <h2 className="font-h2 text-h2 text-white">Project Showcase</h2>
             </div>
-            <div className="hidden md:block">
-              <span className="text-on-surface-variant architectural-tracking cursor-pointer hover:text-primary transition-colors">
-                Browse all 24+ projects →
-              </span>
-            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-gutter h-auto md:h-[800px]">
-            {/* Featured Large */}
-            <div className="md:col-span-2 md:row-span-2 glass-panel rounded-3xl p-8 group overflow-hidden relative flex flex-col justify-end hover:scale-[1.01] transition-transform duration-500">
-              <img
-                alt="Financial Dashboard Project"
-                className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBufZ-U_PF2fibKOvs0QdkcYP_7qZ8D_nSgUuokFFGMqTJBt4WZKriMZAUvAuTcp-BRBVzQLAMmtgO7xg1BSq0VsRXBKPi2DG7dRJM7dqHh332_rKn9IdhWEu1C91pNg6kZYrqjhz9cPNf-lRBgGMXlh0mB-b66yLX14-YvHf9XwkyF2svhU6CL9c_TFOXXKuaukPfuMtA_eJcAt87-cr4fdxVQA9wEGLZM_CMt5kLcdfNcQIjiFhuFmf6OpjGEHie0HUKVNv5Egf6w"
-              />
-              <div className="relative z-10 space-y-4">
-                <div className="flex gap-2">
-                  <span className="px-3 py-1 rounded-full glass-panel text-[10px] text-white font-label-caps">
-                    NEXT.JS
-                  </span>
-                  <span className="px-3 py-1 rounded-full glass-panel text-[10px] text-white font-label-caps">
-                    WEBGL
-                  </span>
-                </div>
-                <h3 className="font-h3 text-h3 text-white architectural-tracking">
-                  Lumina Analytics v2
-                </h3>
-                <p className="text-on-surface-variant architectural-tracking">
-                  Real-time market forecasting engine with 99.9% uptime and
-                  microsecond latency.
-                </p>
-                <button className="text-primary font-bold architectural-tracking flex items-center gap-2 group/btn">
-                  Explore Project
-                  <span
-                    className="material-symbols-outlined group-hover/btn:translate-x-2 transition-transform"
-                    data-icon="arrow_forward"
-                  >
-                    arrow_forward
-                  </span>
-                </button>
-              </div>
-            </div>
-            {/* Bento Medium Top */}
-            <div className="md:col-span-2 glass-panel rounded-3xl p-8 group overflow-hidden relative flex items-center hover:scale-[1.01] transition-transform duration-500">
-              <img
-                alt="Cloud Infrastructure"
-                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuACSPtNBzj1wHSk0Xj4sC0KqWp-lXvqlNgo9EMaN09zbKb2TDdoAc1-kDd7kCAClCIUnsysFfnt4dfQs8Lf2OsOz2COFRrdOATAO0fpP67fl8B6qAqg9Jy8e_MTuXu6KoX62lbW5Y2x_-wmwYwBDOe9oexoKjdCH7QK49SBQ5WUOXnZR2043ef_42uKiQZTcZjC4gMnweDgProV4JyyXkFbxA87EUZVaE0YQLqDY3EGzCJobY2QRy4oSdwfRuu7vOKNtHWIX2QUtIWt"
-              />
-              <div className="relative z-10 w-2/3">
-                <h3 className="font-h3 text-h3 text-white architectural-tracking">
-                  SkyNode Core
-                </h3>
-                <p className="text-on-surface-variant architectural-tracking mb-4">
-                  Distributed edge computing platform for global scale.
-                </p>
-                <span className="px-3 py-1 rounded-full glass-panel text-[10px] text-white font-label-caps">
-                  RUST
-                </span>
-              </div>
-              <div className="relative z-10 w-1/3 flex justify-end">
-                <span
-                  className="material-symbols-outlined text-6xl text-primary/30 group-hover:text-primary transition-colors"
-                  data-icon="cloud_done"
-                >
-                  cloud_done
-                </span>
-              </div>
-            </div>
-            {/* Bento Small 1 */}
-            <div className="glass-panel rounded-3xl p-6 group flex flex-col justify-between hover:scale-[1.01] transition-transform duration-500">
-              <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary mb-4">
-                <span className="material-symbols-outlined" data-icon="shield">
-                  shield
-                </span>
-              </div>
-              <div>
-                <h4 className="font-bold text-white architectural-tracking">
-                  AuthGuard SDK
-                </h4>
-                <p className="text-xs text-on-surface-variant architectural-tracking mt-1">
-                  Biometric-first security layer for mobile apps.
-                </p>
-              </div>
-            </div>
-            {/* Bento Small 2 */}
-            <div className="glass-panel rounded-3xl p-6 group flex flex-col justify-between hover:scale-[1.01] transition-transform duration-500">
-              <div className="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-container mb-4">
-                <span
-                  className="material-symbols-outlined"
-                  data-icon="auto_awesome"
-                >
-                  auto_awesome
-                </span>
-              </div>
-              <div>
-                <h4 className="font-bold text-white architectural-tracking">
-                  GenAI Studio
-                </h4>
-                <p className="text-xs text-on-surface-variant architectural-tracking mt-1">
-                  Intuitive prompt engineering workspace.
-                </p>
-              </div>
-            </div>
-          </div>
+
+          <ProjectShowcase projects={projects} />
         </section>
         {/* Career Milestone Section */}
         <section className="mb-section-gap">

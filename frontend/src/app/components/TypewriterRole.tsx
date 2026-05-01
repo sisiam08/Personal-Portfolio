@@ -9,13 +9,15 @@ const ROLES = [
   "Business-Oriented Developer",
 ];
 
-export default function TypewriterRole() {
+export default function TypewriterRole({ startAnimation = true }: { startAnimation?: boolean }) {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(80);
 
   useEffect(() => {
+    if (!startAnimation) return;
+
     let timer: NodeJS.Timeout;
 
     const handleType = () => {
@@ -44,10 +46,14 @@ export default function TypewriterRole() {
     timer = setTimeout(handleType, typingSpeed);
 
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
+  }, [text, isDeleting, loopNum, typingSpeed, startAnimation]);
 
   return (
-    <div className="flex items-center gap-3 text-xl md:text-2xl font-medium text-on-surface-variant mb-8">
+    <div 
+      className={`flex items-center gap-3 text-xl md:text-2xl font-medium text-on-surface-variant mb-8 transition-opacity duration-1000 ${
+        startAnimation ? "opacity-100" : "opacity-0"
+      }`}
+    >
 
   {/* Static */}
   <span className="text-on-surface-variant/70">I am a</span>
