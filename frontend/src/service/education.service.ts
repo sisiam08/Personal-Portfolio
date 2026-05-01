@@ -5,7 +5,7 @@ const API_URL = env.API_URL;
 export const EducationService = {
   getEducations: async function () {
     try {
-      const res = await fetch(`${API_URL}/educations`);
+      const res = await fetch(`${API_URL}/educations`, { cache: "force-cache" });
 
       const data = await res.json();
 

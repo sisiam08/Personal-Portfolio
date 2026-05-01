@@ -4,7 +4,7 @@ const API_URL = env.API_URL;
 export const ProjectService = {
   getProjects: async function () {
     try {
-      const res = await fetch(`${API_URL}/projects`);
+      const res = await fetch(`${API_URL}/projects`, { cache: "force-cache" });
 
       const data = await res.json();
 

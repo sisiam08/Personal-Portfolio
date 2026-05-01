@@ -1,4 +1,4 @@
-import { EducationService } from "../service/education.service";
+﻿import { EducationService } from "../service/education.service";
 import { ProjectService } from "../service/project.service";
 import { SkillService } from "../service/skill.service";
 import { UserService } from "../service/user.service";
@@ -199,33 +199,32 @@ export default async function Page() {
 
             {/* Inner card */}
             <div className="glass-panel-high rounded-[calc(3rem_-_1.5px)] p-8 md:p-12 relative z-10 flex flex-col md:flex-row gap-12 items-stretch bg-[#0b1326] border-none">
-  
               {/* Desktop Identity */}
-                <div className="md:w-2/5 mt-12 items-center gap-4 hidden md:flex mb-2">
-                  <div className="w-16 h-16 rounded-full glass-panel p-1 shrink-0 relative group">
-                    <div className="absolute inset-0 bg-primary/20 rounded-full blur group-hover:bg-primary/40 transition-all duration-500" />
-                    <img
-                      alt={user?.data?.name || "Siam"}
-                      className="w-full h-full object-cover rounded-full relative z-10 grayscale group-hover:grayscale-0 transition-all duration-500"
-                      src={
-                        user?.data?.image ||
-                        "https://lh3.googleusercontent.com/aida-public/AB6AXuDt0YpYnbrDb3WhZQz1tGsX9xb7ikbL4LIENPmY7Y7xt0WiBw70Ld3IfgePrvlwpfRD2U1eimMPSOgzAKsxGKjKGGJMNhTipiiO_ItDmjBxO3ghexuqBppKXg34it4JHrHRiHYO0gPIqqFw9RpIKebLt4QPR9Iq_P-wrOwiqZuscURKgpVeAFEVowtkos1W7Ox6Ld6WnvqfjAFQSvP7yGQMlQivf389Cq7bSWUQX2dayIw6V9Ro0fA5MeK0YRClIWZeUpACajhDR86m"
-                      }
-                    />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold tracking-wide">
-                      {user?.data?.name || "Md. Shahariar Islam Siam"}
-                    </p>
-                    <p className="text-primary text-xs tracking-widest font-mono uppercase mt-1">
-                      {user?.data?.designation}
-                      <span className="text-[10px] text-gray-400">
-                        <br />
-                        Builder • Learner • Thinker
-                      </span>
-                    </p>
-                  </div>
+              <div className="md:w-2/5 mt-12 items-center gap-4 hidden md:flex mb-2">
+                <div className="w-16 h-16 rounded-full glass-panel p-1 shrink-0 relative group">
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur group-hover:bg-primary/40 transition-all duration-500" />
+                  <img
+                    alt={user?.data?.name || "Siam"}
+                    className="w-full h-full object-cover rounded-full relative z-10 grayscale group-hover:grayscale-0 transition-all duration-500"
+                    src={
+                      user?.data?.image ||
+                      "https://lh3.googleusercontent.com/aida-public/AB6AXuDt0YpYnbrDb3WhZQz1tGsX9xb7ikbL4LIENPmY7Y7xt0WiBw70Ld3IfgePrvlwpfRD2U1eimMPSOgzAKsxGKjKGGJMNhTipiiO_ItDmjBxO3ghexuqBppKXg34it4JHrHRiHYO0gPIqqFw9RpIKebLt4QPR9Iq_P-wrOwiqZuscURKgpVeAFEVowtkos1W7Ox6Ld6WnvqfjAFQSvP7yGQMlQivf389Cq7bSWUQX2dayIw6V9Ro0fA5MeK0YRClIWZeUpACajhDR86m"
+                    }
+                  />
                 </div>
+                <div>
+                  <p className="text-white font-bold tracking-wide">
+                    {user?.data?.name || "Md. Shahariar Islam Siam"}
+                  </p>
+                  <p className="text-primary text-xs tracking-widest font-mono uppercase mt-1">
+                    {user?.data?.designation}
+                    <span className="text-[10px] text-gray-400">
+                      <br />
+                      Builder • Learner • Thinker
+                    </span>
+                  </p>
+                </div>
+              </div>
 
               {/* Structural Divider */}
               <div className="hidden md:block w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
@@ -288,8 +287,12 @@ export default async function Page() {
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-52 p-4 rounded-xl glass-panel-high opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none translate-y-2 group-hover:translate-y-0">
                   <div className="flex flex-col gap-2 text-[11px] text-white">
                     <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-[13px]">{skill.name}</span>
-                      <span className="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[9px] tracking-wider uppercase font-bold">{skill.category}</span>
+                      <span className="font-bold text-[13px]">
+                        {skill.name}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[9px] tracking-wider uppercase font-bold">
+                        {skill.category}
+                      </span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-1.5">
                       <span className="text-white/60">Proficiency</span>
@@ -297,11 +300,16 @@ export default async function Page() {
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-1.5">
                       <span className="text-white/60">Experience</span>
-                      <span className="font-semibold">{skill.projectExperience} {skill.projectExperience === 1 ? 'project' : 'projects'}</span>
+                      <span className="font-semibold">
+                        {skill.projectExperience}{" "}
+                        {skill.projectExperience === 1 ? "project" : "projects"}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/60">Last Used</span>
-                      <span className="font-semibold">{skill.lastUsedYear}</span>
+                      <span className="font-semibold">
+                        {skill.lastUsedYear}
+                      </span>
                     </div>
                   </div>
                   {/* Tooltip Arrow Layering Fix (Place behind/bottom of tooltip inner items) */}
@@ -310,10 +318,10 @@ export default async function Page() {
 
                 <div className="w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] relative z-10">
                   {skill.icon && (
-                    <img 
-                      src={skill.icon} 
-                      alt={skill.name} 
-                      className="w-8 h-8 object-contain transition-all duration-300 group-hover:scale-110 aspect-square" 
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="w-8 h-8 object-contain transition-all duration-300 group-hover:scale-110 aspect-square"
                     />
                   )}
                 </div>
@@ -330,71 +338,57 @@ export default async function Page() {
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Evolution
             </p>
-            <h2 className="font-h1 text-xl text-white">Career Milestone</h2>
+            <h2 className="font-h1 text-xl text-white">Learning & Growth</h2>
           </div>
+
           <div className="max-w-4xl mx-auto relative px-gutter">
-            {/* Timeline Vertical Line */}
+            {/* Timeline Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 timeline-connector -translate-x-1/2 hidden md:block"></div>
+
             <div className="space-y-12">
-              {/* Milestone 1 */}
-              <div className="relative flex flex-col md:flex-row items-center justify-between group">
-                <div className="md:w-[45%] mb-4 md:mb-0">
-                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 shadow-xl">
-                    <span className="text-primary font-label-caps text-[10px] architectural-tracking">
-                      2021 — PRESENT
-                    </span>
-                    <h3 className="text-white font-bold text-lg mt-1 architectural-tracking">
-                      Principal Architect
-                    </h3>
-                    <p className="text-on-surface-variant text-sm mt-2 architectural-tracking">
-                      Leading the architectural vision for multi-region cloud
-                      infrastructures serving millions of users at Stellar
-                      Dynamic.
-                    </p>
+              {educations?.data?.map((edu: any, index: number) => {
+                const isLeft = index % 2 === 0;
+
+                return (
+                  <div
+                    key={index}
+                    className={`relative flex flex-col ${
+                      isLeft ? "md:flex-row" : "md:flex-row-reverse"
+                    } items-center justify-between group`}
+                  >
+                    {/* Card */}
+                    <div className="md:w-[45%] mb-4 md:mb-0">
+                      <div className="glass-panel-high p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 shadow-xl">
+                        {/* Year */}
+                        <span className="text-primary font-label-caps text-[10px] architectural-tracking">
+                          {edu.startYear} — {edu.endYear ?? "Present"}
+                        </span>
+
+                        {/* Title */}
+                        <h3 className="text-white font-bold text-lg mt-1 architectural-tracking">
+                          {edu.degree}
+                        </h3>
+
+                        {/* Institute */}
+                        <p className="text-primary text-sm mt-1">
+                          {edu.institute}
+                        </p>
+
+                        {/* Description */}
+                        <p className="text-on-surface-variant text-sm mt-2 architectural-tracking">
+                          {edu.field}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Timeline Dot */}
+                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(192,193,255,0.8)] z-10"></div>
+
+                    {/* Empty Side */}
+                    <div className="md:w-[45%]"></div>
                   </div>
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(192,193,255,0.8)] z-10"></div>
-                <div className="md:w-[45%]"></div>
-              </div>
-              {/* Milestone 2 */}
-              <div className="relative flex flex-col md:flex-row-reverse items-center justify-between group">
-                <div className="md:w-[45%] mb-4 md:mb-0">
-                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 shadow-xl">
-                    <span className="text-secondary font-label-caps text-[10px] architectural-tracking">
-                      2018 — 2021
-                    </span>
-                    <h3 className="text-white font-bold text-lg mt-1 architectural-tracking">
-                      Senior Full Stack Lead
-                    </h3>
-                    <p className="text-on-surface-variant text-sm mt-2 architectural-tracking">
-                      Pioneered the transition to serverless microservices,
-                      reducing operational costs by 40% for the Veridian fintech
-                      platform.
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex w-4 h-4 rounded-full bg-secondary shadow-[0_0_15px_rgba(68,226,205,0.8)] z-10"></div>
-                <div className="md:w-[45%]"></div>
-              </div>
-              {/* Milestone 3 */}
-              <div className="relative flex flex-col md:flex-row items-center justify-between group">
-                <div className="md:w-[45%] mb-4 md:mb-0">
-                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 shadow-xl">
-                    <span className="text-primary-container font-label-caps text-[10px] architectural-tracking">
-                      2015 — 2018
-                    </span>
-                    <h3 className="text-white font-bold text-lg mt-1 architectural-tracking">
-                      Open Source Contributor
-                    </h3>
-                    <p className="text-on-surface-variant text-sm mt-2 architectural-tracking">
-                      Recognized Top Contributor for major React-based
-                      frameworks and WebGL visualization libraries.
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex w-4 h-4 rounded-full bg-primary-container shadow-[0_0_15px_rgba(128,131,255,0.8)] z-10"></div>
-                <div className="md:w-[45%]"></div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>

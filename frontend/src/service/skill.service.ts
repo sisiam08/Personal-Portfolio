@@ -4,7 +4,9 @@ const API_URL = env.API_URL;
 export const SkillService = {
   getSkills: async function () {
     try {
-      const res = await fetch(`${API_URL}/skills`);
+      const res = await fetch(`${API_URL}/skills`, {
+        cache: "force-cache",
+      });
 
       const data = await res.json();
 
