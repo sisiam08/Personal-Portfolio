@@ -7,7 +7,7 @@ import { upload } from "../../config/multer.config";
 
 const router = Router();
 
-router.get("/me", auth_middleware(), UserController.getMyProfile);
+router.get("/me", UserController.getMyProfile);
 
 router.patch(
   "/me",

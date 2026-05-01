@@ -1,10 +1,8 @@
 import { UserUpdateInput } from "../../generated/prisma/models";
 import { prisma } from "../../lib/prisma";
 
-const getMyProfile = async (id: string) => {
-  const result = await prisma.user.findUnique({
-    where: { id }
-  });
+const getMyProfile = async () => {
+  const result = await prisma.user.findFirst();
   return result;
 };
 

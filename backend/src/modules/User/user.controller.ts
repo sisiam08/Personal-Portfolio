@@ -5,12 +5,8 @@ import { UserService } from "./user.service";
 import { UserUpdateInput } from "../../generated/prisma/models";
 
 const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-  const userId = req.user?.id;
-  if (!userId) {
-     throw new Error("Unauthorized");
-  }
 
-  const result = await UserService.getMyProfile(userId);
+  const result = await UserService.getMyProfile();
 
   sendResponse(res, {
     statusCode: 200,
