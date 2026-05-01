@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import CustomCursor from "./components/CustomCursor";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         className="bg-background text-on-surface overflow-x-hidden cursor-none"
         suppressHydrationWarning
       >
+        <Toaster position="bottom-right" />
         <CustomCursor />
         {children}
       </body>

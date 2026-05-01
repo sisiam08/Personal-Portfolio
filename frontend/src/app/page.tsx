@@ -6,6 +6,7 @@ import HeroTextGroup from "./components/HeroTextGroup";
 import MagneticButton from "./components/MagneticButton";
 import Navbar from "./components/Navbar";
 import ProjectShowcase from "./components/ProjectShowcase";
+import ContactSection from "./components/ContactSection";
 
 export default async function Page() {
   const userRes = await UserService.getUserProfile();
@@ -168,7 +169,8 @@ export default async function Page() {
             </div>
           </div>
         </section>
-        {/* Projects */}
+
+        {/* Projects Section */}
         <section className="mb-section-gap">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
@@ -179,13 +181,14 @@ export default async function Page() {
 
           <ProjectShowcase projects={projects} />
         </section>
+
         {/* About Section */}
         <section className="mb-section-gap relative">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Identity
             </p>
-            <h2 className="font-h1 text-xl text-white">About the Builder</h2>
+            <h2 className="font-h1 text-xl text-white">About me</h2>
           </div>
 
           {/* Background Glow */}
@@ -268,6 +271,7 @@ export default async function Page() {
             </div>
           </div>
         </section>
+
         {/* Skills Section */}
         <section className="mb-section-gap">
           <div className="text-center mb-stack-lg">
@@ -332,7 +336,8 @@ export default async function Page() {
             ))}
           </div>
         </section>
-        {/* Career Milestone Section */}
+
+        {/* Education Section */}
         <section className="mb-section-gap">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
@@ -393,22 +398,8 @@ export default async function Page() {
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-20 text-center">
-          <h2 className="font-h1 text-h2 md:text-h1 text-white mb-8">
-            Ready to Build <br />
-            the Future?
-          </h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 architectural-tracking">
-            I'm currently accepting new high-impact collaborations. Let's
-            discuss how we can elevate your platform's technical architecture.
-          </p>
-          <div className="flex justify-center gap-6">
-            <button className="bg-primary text-on-primary px-10 py-5 rounded-full font-extrabold text-lg architectural-tracking shadow-[0_0_30px_rgba(192,193,255,0.4)] hover:scale-105 transition-transform duration-300">
-              Book a Consultation
-            </button>
-          </div>
-        </section>
+        {/* Contact Section */}
+        <ContactSection user={user.data} />
       </main>
       {/* Footer */}
       <footer className="w-full py-12 mt-20 border-t border-white/5 bg-transparent max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6 font-inter text-sm text-slate-500">
@@ -448,3 +439,4 @@ export default async function Page() {
     </>
   );
 }
+
