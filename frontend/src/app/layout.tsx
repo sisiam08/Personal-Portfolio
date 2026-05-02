@@ -9,9 +9,8 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "DevPortfolio | Senior Full Stack Engineer",
-  description:
-    "Senior Full Stack Engineer specializing in high-performance cloud architectures and glassmorphic interfaces.",
+  title: "Shahariar Siam",
+  description: "Full Stack Developer",
 };
 
 export default function RootLayout({
