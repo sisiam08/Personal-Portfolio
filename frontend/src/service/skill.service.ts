@@ -1,3 +1,4 @@
+import next from "next";
 import { env } from "../env";
 const API_URL = env.API_URL;
 
@@ -5,7 +6,9 @@ export const SkillService = {
   getSkills: async function () {
     try {
       const res = await fetch(`${API_URL}/skills`, {
-        cache: "force-cache",
+        next: {
+          revalidate: 60,
+        },
       });
 
       const data = await res.json();

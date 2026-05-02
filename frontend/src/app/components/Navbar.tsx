@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import logo from "../../../public/Logo.png";
 
 interface NavLink {
   label: string;
@@ -38,7 +40,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-3 rounded-full mt-4 max-w-[1200px] mx-auto border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.3)] font-inter tracking-tight">
       {/* Logo */}
       <div className="text-xl font-bold tracking-tighter text-white">
-        DevPortfolio
+        <Image src={logo} alt="Siam" width={50} height={50} />
       </div>
 
       {/* Nav links */}

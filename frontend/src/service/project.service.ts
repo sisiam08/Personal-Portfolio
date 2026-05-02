@@ -4,7 +4,11 @@ const API_URL = env.API_URL;
 export const ProjectService = {
   getProjects: async function () {
     try {
-      const res = await fetch(`${API_URL}/projects`, { cache: "force-cache" });
+      const res = await fetch(`${API_URL}/projects`, {
+        next: {
+          revalidate: 60,
+        },
+      });
 
       const data = await res.json();
 
