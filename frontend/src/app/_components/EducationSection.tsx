@@ -17,7 +17,7 @@ export default function EducationSection({ educations }: EducationSectionProps) 
         <p className="text-primary font-label-caps architectural-tracking mb-2">
           Evolution
         </p>
-        <h2 className="font-h1 text-xl text-white">Learning &amp; Growth</h2>
+        <h2 className="font-h1 text-xl text-on-surface">Learning &amp; Growth</h2>
       </div>
 
       <div className="max-w-4xl mx-auto relative px-gutter">
@@ -37,14 +37,14 @@ export default function EducationSection({ educations }: EducationSectionProps) 
               >
                 {/* Card */}
                 <div className="md:w-[45%] mb-4 md:mb-0">
-                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 shadow-xl">
+                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-primary/5 transition-all duration-300 shadow-xl">
                     {/* Year */}
                     <span className="text-primary font-label-caps text-[10px] architectural-tracking">
                       {edu.startYear} — {edu.endYear ?? "Present"}
                     </span>
 
                     {/* Title */}
-                    <h3 className="text-white font-bold text-lg mt-1 architectural-tracking">
+                    <h3 className="text-on-surface font-bold text-lg mt-1 architectural-tracking">
                       {edu.degree}
                     </h3>
 

@@ -66,7 +66,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
                   {project.status}
                 </span>
               )}
-              <h3 className="text-white font-bold text-xl mb-1">{project.title}</h3>
+              <h3 className="text-on-surface font-bold text-xl mb-1">{project.title}</h3>
               <p className="text-xs text-on-surface-variant line-clamp-2">
                 {project.description}
               </p>
@@ -89,7 +89,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
             {/* Close Button */}
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white hover:text-primary hover:bg-white/10 z-50 transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface hover:text-primary hover:bg-primary/5 z-50 transition-colors"
             >
               <span className="material-symbols-outlined">close</span>
             </button>
@@ -97,7 +97,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
             <div className="overflow-y-auto no-scrollbar relative w-full h-full flex flex-col md:flex-row">
               
               {/* Left Column: Visuals & Core Info */}
-              <div className="w-full md:w-5/12 bg-black/40 flex flex-col">
+              <div className="w-full md:w-5/12 bg-surface-container-high/80 flex flex-col">
                 <div className="relative h-64 md:h-80 w-full shrink-0">
                   <img
                     src={selectedProject.image}
@@ -107,14 +107,14 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   
                   {selectedProject.status && (
-                    <div className="absolute top-6 left-6 px-3 py-1 rounded-full glass-panel-high border-white/10 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md shadow-lg">
+                    <div className="absolute top-6 left-6 px-3 py-1 rounded-full glass-panel-high border-outline-variant/20 text-xs font-bold uppercase tracking-wider text-on-surface backdrop-blur-md shadow-lg">
                       {selectedProject.status}
                     </div>
                   )}
                 </div>
 
                 <div className="p-6 md:p-8 flex-1 flex flex-col">
-                  <h2 className="font-h2 text-3xl text-white mb-4 leading-tight">
+                  <h2 className="font-h2 text-3xl text-on-surface mb-4 leading-tight">
                     {selectedProject.title}
                   </h2>
                   <p className="text-on-surface-variant text-sm leading-relaxed mb-8 flex-1">
@@ -127,7 +127,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
                       {selectedProject.skills?.map((skill: any, idx: number) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/90 font-medium"
+                          className="px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-xs text-on-surface-variant font-medium"
                         >
                           {getSkillName(skill)}
                         </span>
@@ -152,7 +152,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
                          href={selectedProject.githubUrl}
                          target="_blank"
                          rel="noreferrer"
-                         className="flex-1 text-center py-3 rounded-full glass-panel text-white font-bold text-sm hover:bg-white/10 transition-colors"
+                         className="flex-1 text-center py-3 rounded-full glass-panel text-on-surface font-bold text-sm hover:bg-primary/10 transition-colors"
                       >
                          Source Code
                       </a>
@@ -165,7 +165,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
               <div className="w-full md:w-7/12 p-6 md:p-10 lg:p-12 space-y-10">
                 {selectedProject.problem && (
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
                       <span className="material-symbols-outlined text-error">warning</span>
                       The Problem
                     </h3>
@@ -179,7 +179,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
 
                 {selectedProject.solution && (
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
                       <span className="material-symbols-outlined text-primary">emoji_objects</span>
                       The Solution
                     </h3>
@@ -193,7 +193,7 @@ export default function ProjectShowcase({ projects = [] }: ProjectShowcaseProps)
 
                 {selectedProject.challenges && (
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
                       <span className="material-symbols-outlined text-secondary">extension</span>
                       Key Challenges
                     </h3>

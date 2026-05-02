@@ -16,7 +16,7 @@ export default function HeroSection({
     <section className="flex flex-col md:flex-row gap-8 lg:gap-16 items-center pt-section-gap">
       {/* Vertical Social Links Sidebar */}
       <div className="hidden md:flex flex-col items-center gap-6 shrink-0 mt-12 animate-fade-in">
-        <div className="w-[1px] h-12 bg-gradient-to-b from-transparent to-white/20"></div>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-transparent to-outline-variant/50"></div>
 
         {user?.github && (
           <a
@@ -59,7 +59,7 @@ export default function HeroSection({
             href={user.x}
             target="_blank"
             rel="noreferrer"
-            className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-white hover:border-white/50 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20"
+            className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline/60 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20"
             title="X"
           >
             <svg
@@ -72,14 +72,14 @@ export default function HeroSection({
           </a>
         )}
 
-        <div className="w-[1px] h-24 bg-gradient-to-b from-white/20 to-transparent"></div>
+        <div className="w-[1px] h-24 bg-gradient-to-b from-outline-variant/50 to-transparent"></div>
       </div>
 
       {/* Main Hero Grid */}
       <div className="grid md:grid-cols-12 gap-gutter items-center w-full flex-1">
         <div className="md:col-span-7 space-y-stack-lg">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full glass-panel text-secondary font-label-caps architectural-tracking">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-teal-300 animate-pulse shadow-[0_0_8px_#5eead4]"></span>
             Available for high-stakes projects
           </div>
 
@@ -88,7 +88,7 @@ export default function HeroSection({
             bio={user?.bio || "Loading profile..."}
           />
 
-          <MagneticButton className="glass-panel text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 architectural-tracking inline-block">
+          <MagneticButton className="glass-panel text-on-surface px-8 py-4 rounded-full font-bold hover:bg-primary/5 transition-all duration-300 architectural-tracking inline-block">
             Resume
           </MagneticButton>
         </div>
@@ -117,19 +117,19 @@ export default function HeroSection({
             </div>
 
             {/* Projects bubble */}
-            <div className="absolute -top-4 -right-2 md:-right-8 glass-panel px-4 py-3 rounded-xl text-white text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105">
+            <div className="absolute -top-4 -right-2 md:-right-8 glass-panel px-4 py-3 rounded-xl text-on-surface text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105">
               <p className="font-bold text-lg">{projectCount}+</p>
               <p className="text-xs text-on-surface-variant">Projects Built</p>
             </div>
 
             {/* Technologies bubble */}
-            <div className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 glass-panel px-4 py-3 rounded-xl text-white text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105 z-10">
+            <div className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 glass-panel px-4 py-3 rounded-xl text-on-surface text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105 z-10">
               <p className="font-bold text-lg">{skillCount}+</p>
               <p className="text-xs text-on-surface-variant">Technologies</p>
             </div>
 
             {/* Learning Years bubble */}
-            <div className="absolute bottom-8 -right-2 md:-right-8 glass-panel px-4 py-3 rounded-xl text-white text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105">
+            <div className="absolute bottom-8 -right-2 md:-right-8 glass-panel px-4 py-3 rounded-xl text-on-surface text-sm shadow-lg backdrop-blur-md transition-transform hover:scale-105">
               <p className="font-bold text-lg">
                 {new Date().getFullYear() - 2025}+
               </p>

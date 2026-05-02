@@ -2,14 +2,14 @@ import { EducationService } from "../service/education.service";
 import { ProjectService } from "../service/project.service";
 import { SkillService } from "../service/skill.service";
 import { UserService } from "../service/user.service";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import ProjectsSection from "./components/ProjectsSection";
-import AboutSection from "./components/AboutSection";
-import SkillsSection from "./components/SkillsSection";
-import EducationSection from "./components/EducationSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
+import Navbar from "./_components/Navbar";
+import HeroSection from "./_components/HeroSection";
+import ProjectsSection from "./_components/ProjectsSection";
+import AboutSection from "./_components/AboutSection";
+import SkillsSection from "./_components/SkillsSection";
+import EducationSection from "./_components/EducationSection";
+import ContactSection from "./_components/ContactSection";
+import Footer from "./_components/Footer";
 
 export default async function Page() {
   const userRes = await UserService.getUserProfile();

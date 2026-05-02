@@ -2,6 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import logo from "../../../public/Logo.png";
 
 interface FooterProps {
   user: any;
@@ -89,18 +91,19 @@ export default function Footer({ user }: FooterProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
             {/* Brand Section */}
             <div className="space-y-6">
-              <div className="text-2xl font-bold tracking-tighter text-white">
-                DevPortfolio<span className="text-primary">.</span>
+              <div className=" flex items-center text-2xl font-bold tracking-tighter text-on-surface">
+                <Image src={logo} alt="Siam" width={50} height={50} />
+                Siam<span className="text-primary font-h1">.</span>
               </div>
               <p className="text-on-surface-variant text-sm leading-relaxed max-w-xs architectural-tracking opacity-80">
-                Crafting digital experiences with precision, performance, and
-                premium aesthetics. Focused on full-stack excellence.
+                I don’t just build apps — I build products that solve real
+                problems and scale.
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="space-y-6">
-              <h4 className="text-white font-bold architectural-tracking text-sm uppercase">
+              <h4 className="text-on-surface font-bold architectural-tracking text-sm uppercase">
                 Navigation
               </h4>
               <ul className="grid grid-cols-2 gap-4">
@@ -119,7 +122,7 @@ export default function Footer({ user }: FooterProps) {
 
             {/* Connect Section */}
             <div className="space-y-6">
-              <h4 className="text-white font-bold architectural-tracking text-sm uppercase">
+              <h4 className="text-on-surface font-bold architectural-tracking text-sm uppercase">
                 Connect
               </h4>
               <div className="flex flex-wrap gap-4">
@@ -129,7 +132,7 @@ export default function Footer({ user }: FooterProps) {
                     href={social.href}
                     whileHover={{ scale: 1.1, translateY: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-white hover:border-white/20 transition-all duration-300 group"
+                    className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline transition-all duration-300 group"
                     title={social.label}
                   >
                     <span className="text-xs font-medium opacity-0 group-hover:opacity-100 absolute -top-8 bg-surface-container px-2 py-1 rounded-md transition-all duration-300 pointer-events-none whitespace-nowrap">
@@ -144,7 +147,7 @@ export default function Footer({ user }: FooterProps) {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="mt-12 pt-8 border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-on-surface-variant text-xs architectural-tracking opacity-60">
               © {currentYear} Md. Shahariar Islam Siam. All rights reserved.
             </div>

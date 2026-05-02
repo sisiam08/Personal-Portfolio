@@ -41,7 +41,7 @@ export default function ContactSection({ user }: { user?: any }) {
         <p className="text-primary font-label-caps architectural-tracking mb-2">
           Contact
         </p>
-        <h2 className="font-h1 text-xl text-white">Get in Touch</h2>
+        <h2 className="font-h1 text-xl text-on-surface">Get in Touch</h2>
       </div>
       <div className="grid md:grid-cols-2 gap-gutter max-w-6xl mx-auto items-start">
         {/* Contact Form */}
@@ -55,7 +55,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 Name
               </label>
               <input
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
+                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
                 id="name"
                 placeholder="Enter your name"
                 type="text"
@@ -72,7 +72,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 Email
               </label>
               <input
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
+                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
                 id="email"
                 placeholder="name@example.com"
                 type="email"
@@ -89,7 +89,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 Message
               </label>
               <textarea
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md resize-none"
+                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md resize-none"
                 id="message"
                 placeholder="How can I help you?"
                 rows={4}
@@ -101,10 +101,10 @@ export default function ContactSection({ user }: { user?: any }) {
             <MagneticButton
               hideBorder
               containerClassName="w-full rounded-xl"
-              className={`w-full glass-panel text-white py-4 rounded-xl font-bold architectural-tracking transition-all duration-300 shadow-md hover:shadow-lg ${
+              className={`w-full glass-panel text-on-surface py-4 rounded-xl font-bold architectural-tracking transition-all duration-300 shadow-md hover:shadow-lg ${
                 isSubmitting
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-white/10"
+                  : "hover:bg-primary/10"
               }`}
               type="submit"
               disabled={isSubmitting}
@@ -116,7 +116,7 @@ export default function ContactSection({ user }: { user?: any }) {
         {/* Contact Details */}
         <div className="flex flex-col justify-center h-full space-y-10 md:pl-10 animate-reveal-right">
           <div className="space-y-4">
-            <h3 className="text-h3 text-white architectural-tracking">
+            <h3 className="text-h3 text-on-surface font-h3 architectural-tracking">
               Let's talk about your project.
             </h3>
             <p className="text-on-surface-variant body-lg architectural-tracking">
@@ -146,7 +146,7 @@ export default function ContactSection({ user }: { user?: any }) {
                   <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
                     Email
                   </p>
-                  <p className="text-white font-bold architectural-tracking">
+                  <p className="text-on-surface font-bold architectural-tracking">
                     {user.email}
                   </p>
                 </div>
@@ -174,7 +174,7 @@ export default function ContactSection({ user }: { user?: any }) {
                   <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
                     Call
                   </p>
-                  <p className="text-white font-bold architectural-tracking">
+                  <p className="text-on-surface font-bold architectural-tracking">
                     {user.phone}
                   </p>
                 </div>
@@ -205,7 +205,7 @@ export default function ContactSection({ user }: { user?: any }) {
                   <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
                     WhatsApp
                   </p>
-                  <p className="text-white font-bold architectural-tracking">
+                  <p className="text-on-surface font-bold architectural-tracking">
                     {user.whatsapp}
                   </p>
                 </div>

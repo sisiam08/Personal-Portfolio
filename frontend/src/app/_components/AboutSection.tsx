@@ -12,7 +12,7 @@ export default function AboutSection({ user }: AboutSectionProps) {
         <p className="text-primary font-label-caps architectural-tracking mb-2">
           Identity
         </p>
-        <h2 className="font-h1 text-xl text-white">About me</h2>
+        <h2 className="font-h1 text-xl text-on-surface">About me</h2>
       </div>
 
       {/* Background Glow */}
@@ -25,7 +25,7 @@ export default function AboutSection({ user }: AboutSectionProps) {
         <div className="about-border-beam" />
 
         {/* Inner card */}
-        <div className="glass-panel-high rounded-[calc(3rem_-_1.5px)] p-8 md:p-12 relative z-10 flex flex-col md:flex-row gap-12 items-stretch bg-[#0b1326] border-none">
+        <div className="glass-panel-high rounded-[calc(3rem_-_1.5px)] p-8 md:p-12 relative z-10 flex flex-col md:flex-row gap-12 items-stretch bg-surface border-none">
           {/* Desktop Identity */}
           <div className="md:w-2/5 mt-12 items-center gap-4 hidden md:flex mb-2">
             <div className="w-16 h-16 rounded-full glass-panel p-1 shrink-0 relative group">
@@ -37,12 +37,12 @@ export default function AboutSection({ user }: AboutSectionProps) {
               />
             </div>
             <div>
-              <p className="text-white font-bold tracking-wide">
+              <p className="text-on-surface font-bold tracking-wide">
                 {user?.name || "Md. Shahariar Islam Siam"}
               </p>
               <p className="text-primary text-xs tracking-widest font-mono uppercase mt-1">
                 {user?.designation}
-                <span className="text-[10px] text-gray-400">
+                <span className="text-[10px] text-on-surface-variant">
                   <br />
                   Builder • Learner • Thinker
                 </span>
@@ -51,8 +51,8 @@ export default function AboutSection({ user }: AboutSectionProps) {
           </div>
 
           {/* Structural Divider */}
-          <div className="hidden md:block w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-          <div className="md:hidden h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-2"></div>
+          <div className="hidden md:block w-[1px] bg-gradient-to-b from-transparent via-outline-variant/40 to-transparent"></div>
+          <div className="md:hidden h-[1px] w-full bg-gradient-to-r from-transparent via-outline-variant/40 to-transparent my-2"></div>
 
           {/* Right: Content */}
           <div className="md:w-3/5 flex flex-col justify-center space-y-6 md:space-y-8">
@@ -73,12 +73,12 @@ export default function AboutSection({ user }: AboutSectionProps) {
                 />
               </div>
               <div>
-                <p className="text-white font-bold tracking-wide text-sm">
+                <p className="text-on-surface font-bold tracking-wide text-sm">
                   {user?.name || "Md. Shahariar Islam Siam"}
                 </p>
                 <p className="text-primary text-[10px] tracking-widest font-mono uppercase mt-1">
                   {user?.designation}
-                  <span className="text-[10px] text-gray-400">
+                  <span className="text-[10px] text-on-surface-variant">
                     <br />
                     Builder • Learner • Thinker
                   </span>

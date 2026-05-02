@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import CustomCursor from "./components/CustomCursor";
+import CustomCursor from "./_components/CustomCursor";
+import { ThemeProvider } from "../components/provider/theme-provider";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "DevPortfolio | Senior Full Stack Engineer",
-  description: "Senior Full Stack Engineer specializing in high-performance cloud architectures and glassmorphic interfaces.",
+  description:
+    "Senior Full Stack Engineer specializing in high-performance cloud architectures and glassmorphic interfaces.",
 };
 
 export default function RootLayout({
@@ -14,12 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={cn("font-sans", inter.variable)}
+      suppressHydrationWarning
+    >
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -34,13 +41,20 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body 
+      <body
         className="bg-background text-on-surface overflow-x-hidden cursor-none"
         suppressHydrationWarning
       >
-        <Toaster position="bottom-right" />
-        <CustomCursor />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster position="bottom-right" />
+          <CustomCursor />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

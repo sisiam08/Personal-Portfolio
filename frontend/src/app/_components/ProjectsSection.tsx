@@ -11,7 +11,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         <p className="text-primary font-label-caps architectural-tracking mb-2">
           Curated Works
         </p>
-        <h2 className="font-h1 text-xl text-white">Project Showcase</h2>
+        <h2 className="font-h1 text-xl text-on-surface">Project Showcase</h2>
       </div>
 
       <ProjectShowcase projects={projects} />

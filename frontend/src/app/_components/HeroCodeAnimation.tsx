@@ -7,7 +7,14 @@ interface HeroCodeAnimationProps {
   bio: string;
 }
 
-type TokenType = "tag" | "attr" | "value" | "text" | "punct" | "plain" | "nameText";
+type TokenType =
+  | "tag"
+  | "attr"
+  | "value"
+  | "text"
+  | "punct"
+  | "plain"
+  | "nameText";
 
 interface Token {
   text: string;
@@ -58,7 +65,10 @@ const STYLE_MAP: Record<TokenType, { cls: string; shadow: string }> = {
   tag: { cls: "text-[#4a8c57]", shadow: "none" }, // dark muted green
   attr: { cls: "text-[#ffab70]", shadow: "0 0 10px rgba(255,171,112,0.45)" }, // orange
   value: { cls: "text-[#a5d6ff]", shadow: "0 0 10px rgba(165,214,255,0.4)" }, // light blue
-  nameText: { cls: "text-[#a5d6ff] font-bold", shadow: "0 0 6px rgba(165,214,255,0.4)" }, // highlighted string values
+  nameText: {
+    cls: "text-primary dark:text-[#a5d6ff] font-bold",
+    shadow: "0 0 6px rgba(165,214,255,0.4)",
+  }, // highlighted string values
   text: { cls: "text-[#8d96a0]", shadow: "none" }, // muted slate
   punct: { cls: "text-[#8b949e]", shadow: "none" }, // muted grey
   plain: { cls: "text-transparent", shadow: "none" },
