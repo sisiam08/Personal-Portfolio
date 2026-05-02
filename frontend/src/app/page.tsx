@@ -1,4 +1,4 @@
-﻿import { EducationService } from "../service/education.service";
+import { EducationService } from "../service/education.service";
 import { ProjectService } from "../service/project.service";
 import { SkillService } from "../service/skill.service";
 import { UserService } from "../service/user.service";
@@ -7,6 +7,7 @@ import MagneticButton from "./components/MagneticButton";
 import Navbar from "./components/Navbar";
 import ProjectShowcase from "./components/ProjectShowcase";
 import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
 
 export default async function Page() {
   const userRes = await UserService.getUserProfile();
@@ -19,7 +20,6 @@ export default async function Page() {
   const projects = projectRes.data;
   const educations = educationRes.data;
 
-  // console.log(projects);
 
   return (
     <>
@@ -34,7 +34,7 @@ export default async function Page() {
           <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] bg-secondary-container/10 blur-[120px] rounded-full"></div>
         </div>
         {/* Hero Section */}
-        <section className="flex flex-col md:flex-row gap-8 lg:gap-16 items-center pt-20 pb-10 mb-section-gap">
+        <section className="flex flex-col md:flex-row gap-8 lg:gap-16 items-center pt-section-gap">
           {/* Vertical Social Links Sidebar */}
           <div className="hidden md:flex flex-col items-center gap-6 shrink-0 mt-12 animate-fade-in">
             <div className="w-[1px] h-12 bg-gradient-to-b from-transparent to-white/20"></div>
@@ -171,7 +171,7 @@ export default async function Page() {
         </section>
 
         {/* Projects Section */}
-        <section className="mb-section-gap">
+        <section id="projects" className="pt-section-gap">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Curated Works
@@ -183,7 +183,7 @@ export default async function Page() {
         </section>
 
         {/* About Section */}
-        <section className="mb-section-gap relative">
+        <section id="about" className="pt-section-gap relative">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Identity
@@ -273,7 +273,7 @@ export default async function Page() {
         </section>
 
         {/* Skills Section */}
-        <section className="mb-section-gap">
+        <section id="skills" className="pt-section-gap">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Capabilities
@@ -288,7 +288,7 @@ export default async function Page() {
                 className="group relative flex flex-col items-center gap-3 p-4 rounded-2xl glass-panel hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 cursor-default"
               >
                 {/* TOOLTIP INFO BOX */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-52 p-4 rounded-xl glass-panel-high opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none translate-y-2 group-hover:translate-y-0">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-52 p-4 rounded-xl glass-panel-high opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-5000 pointer-events-none translate-y-2 group-hover:translate-y-0">
                   <div className="flex flex-col gap-2 text-[11px] text-white">
                     <div className="flex justify-between items-center mb-1">
                       <span className="font-bold text-[13px]">
@@ -338,7 +338,7 @@ export default async function Page() {
         </section>
 
         {/* Education Section */}
-        <section className="mb-section-gap">
+        <section id="education" className="pt-section-gap">
           <div className="text-center mb-stack-lg">
             <p className="text-primary font-label-caps architectural-tracking mb-2">
               Evolution
@@ -401,42 +401,7 @@ export default async function Page() {
         {/* Contact Section */}
         <ContactSection user={user.data} />
       </main>
-      {/* Footer */}
-      <footer className="w-full py-12 mt-20 border-t border-white/5 bg-transparent max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6 font-inter text-sm text-slate-500">
-        <div className="text-lg font-semibold text-slate-300 architectural-tracking">
-          DevPortfolio
-        </div>
-        <div className="flex gap-8">
-          <a
-            className="text-slate-500 hover:text-indigo-400 transition-colors architectural-tracking opacity-80 hover:opacity-100"
-            href="#"
-          >
-            GitHub
-          </a>
-          <a
-            className="text-slate-500 hover:text-indigo-400 transition-colors architectural-tracking opacity-80 hover:opacity-100"
-            href="#"
-          >
-            LinkedIn
-          </a>
-          <a
-            className="text-slate-500 hover:text-indigo-400 transition-colors architectural-tracking opacity-80 hover:opacity-100"
-            href="#"
-          >
-            Twitter
-          </a>
-          <a
-            className="text-slate-500 hover:text-indigo-400 transition-colors architectural-tracking opacity-80 hover:opacity-100"
-            href="#"
-          >
-            Email
-          </a>
-        </div>
-        <div className="text-center md:text-right architectural-tracking">
-          © 2024 Full Stack Developer. Built with Next.js &amp; Lumina Glass.
-        </div>
-      </footer>
+      <Footer user={user?.data} />
     </>
   );
 }
-

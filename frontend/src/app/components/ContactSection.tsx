@@ -36,7 +36,7 @@ export default function ContactSection({ user }: { user?: any }) {
   };
 
   return (
-    <section className="mb-section-gap">
+    <section id="contact" className="pt-section-gap">
       <div className="text-center mb-stack-lg">
         <p className="text-primary font-label-caps architectural-tracking mb-2">
           Contact
@@ -102,7 +102,9 @@ export default function ContactSection({ user }: { user?: any }) {
               hideBorder
               containerClassName="w-full rounded-xl"
               className={`w-full glass-panel text-white py-4 rounded-xl font-bold architectural-tracking transition-all duration-300 shadow-md hover:shadow-lg ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-white/10"
+                isSubmitting
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-white/10"
               }`}
               type="submit"
               disabled={isSubmitting}
@@ -131,7 +133,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 <MagneticButton
                   asDiv
                   containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-500"
+                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-primary transition-all duration-500"
                 >
                   <span
                     className="material-symbols-outlined text-2xl"
@@ -159,7 +161,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 <MagneticButton
                   asDiv
                   containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500"
+                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-secondary transition-all duration-500"
                 >
                   <span
                     className="material-symbols-outlined text-2xl"
@@ -187,7 +189,7 @@ export default function ContactSection({ user }: { user?: any }) {
                 <MagneticButton
                   asDiv
                   containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-all duration-500"
+                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-[#25D366] transition-all duration-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
