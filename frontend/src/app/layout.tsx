@@ -1,16 +1,70 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "react-hot-toast";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "./_components/CustomCursor";
 import { ThemeProvider } from "../components/provider/theme-provider";
-import { Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { env } from "../env";
+import ScrollProgress from "./_components/ScrollProgress";
+import BackToTop from "./_components/BackToTop";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const space = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Shahariar Siam",
-  description: "Full Stack Developer",
+  metadataBase: new URL(env.FRONTEND_URL),
+  title: {
+    default: "Shahariar Siam",
+    template: "%s — Shahariar Siam",
+  },
+  description:
+    "Full-stack developer building fast, scalable products end to end — from interface to infrastructure.",
+  keywords: [
+    "Shahariar Siam",
+    "Full Stack Developer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Portfolio",
+  ],
+  authors: [{ name: "Md. Shahariar Islam Siam" }],
+  openGraph: {
+    title: "Shahariar Siam — Full Stack Developer",
+    description:
+      "Full-stack developer building fast, scalable products end to end — from interface to infrastructure.",
+    type: "website",
+    siteName: "Shahariar Siam",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shahariar Siam — Full Stack Developer",
+    description:
+      "Full-stack developer building fast, scalable products end to end.",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f1ea" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090a" },
+  ],
 };
 
 export default function RootLayout({
@@ -21,27 +75,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("font-sans", inter.variable)}
+      className={`${inter.variable} ${space.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </head>
       <body
-        className="bg-background text-on-surface overflow-x-hidden cursor-none"
+        className="page-texture min-h-svh bg-canvas font-sans text-ink antialiased"
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -50,9 +88,26 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster position="bottom-right" />
-          <CustomCursor />
+          <Toaster
+            position="bottom-right"
+            containerStyle={{
+              bottom: "calc(1rem + env(safe-area-inset-bottom))",
+              right: "calc(1rem + env(safe-area-inset-right))",
+              left: "auto",
+            }}
+            toastOptions={{
+              style: {
+                background: "var(--surface)",
+                color: "var(--ink)",
+                border: "1px solid var(--line)",
+                borderRadius: "12px",
+                fontSize: "0.85rem",
+              },
+            }}
+          />
+          <ScrollProgress />
           {children}
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>

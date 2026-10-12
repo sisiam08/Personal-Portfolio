@@ -2,7 +2,11 @@
 
 import { MessageService } from "../service/message.service";
 
-export const createMessage = async (formData: any) => {
+export const createMessage = async (formData: {
+  name: string;
+  email: string;
+  message: string;
+}) => {
   const { data, error } = await MessageService.createMessage(formData);
 
   if (error) {

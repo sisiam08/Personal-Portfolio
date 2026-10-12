@@ -1,61 +1,97 @@
-import { EducationService } from "../service/education.service";
-import { ProjectService } from "../service/project.service";
-import { SkillService } from "../service/skill.service";
+import type { Metadata } from "next";
+import { cache } from "react";
+import { TriangleAlert } from "lucide-react";
 import { UserService } from "../service/user.service";
+import { SkillService } from "../service/skill.service";
+import { ProjectService } from "../service/project.service";
+import { EducationService } from "../service/education.service";
+import { ExperienceService } from "../service/experience.service";
 import Navbar from "./_components/Navbar";
 import HeroSection from "./_components/HeroSection";
-import ProjectsSection from "./_components/ProjectsSection";
 import AboutSection from "./_components/AboutSection";
-import SkillsSection from "./_components/SkillsSection";
+import TechTree from "./_components/TechTree";
+import ProjectsStack from "./_components/ProjectsStack";
+import ExperienceSection from "./_components/ExperienceSection";
 import EducationSection from "./_components/EducationSection";
 import ContactSection from "./_components/ContactSection";
 import Footer from "./_components/Footer";
+import type {
+  Education,
+  Experience,
+  ProfileUser,
+  Project,
+  Skill,
+} from "./_components/types";
+
+const getUserProfile = cache(() => UserService.getUserProfile());
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await getUserProfile();
+  const user = data?.data as ProfileUser | undefined;
+  return {
+    title: "Shahariar Siam",
+    description:
+      user?.bio ||
+      "Full-stack developer building fast, scalable products end to end.",
+  };
+}
 
 export default async function Page() {
-  const userRes = await UserService.getUserProfile();
-  const skillRes = await SkillService.getSkills();
-  const projectRes = await ProjectService.getProjects();
-  const educationRes = await EducationService.getEducations();
+  const [userRes, skillRes, projectRes, educationRes, experienceRes] =
+    await Promise.all([
+      getUserProfile(),
+      SkillService.getSkills(),
+      ProjectService.getProjects(),
+      EducationService.getEducations(),
+      ExperienceService.getExperiences(),
+    ]);
 
-  const user = userRes.data;
-  const skills = skillRes.data;
-  const projects = projectRes.data;
-  const educations = educationRes.data;
+  const user = (userRes.data?.data as ProfileUser) ?? null;
+  const skills = (skillRes.data?.data as Skill[]) ?? [];
+  const projectPayload = projectRes.data?.data as
+    | { meta?: { total?: number }; data?: Project[] }
+    | undefined;
+  const projects = projectPayload?.data ?? [];
+  const educations = (educationRes.data?.data as Education[]) ?? [];
+  const experiences = (experienceRes.data?.data as Experience[]) ?? [];
 
-  const projectCount =
-    projects?.data?.data?.length ?? projects?.data?.length ?? 0;
-  const skillCount = skills?.data?.length ?? 0;
+  const projectCount = projectPayload?.meta?.total ?? projects.length;
+  const skillCount = skills.length;
+
+  const hasError = Boolean(
+    userRes.error ||
+      skillRes.error ||
+      projectRes.error ||
+      educationRes.error ||
+      experienceRes.error,
+  );
 
   return (
     <>
-      <Navbar />
-      <main className="relative pt-15 px-margin-page max-w-container-max mx-auto">
-        {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 -z-10 w-full h-screen overflow-hidden pointer-events-none">
-          <div className="absolute top-10 -right-20 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px]"></div>
-          <div className="absolute top-20 right-40 w-64 h-64 glass-panel rounded-3xl rotate-12 opacity-40"></div>
-          <div className="absolute top-60 right-10 w-48 h-48 glass-panel rounded-full -rotate-12 opacity-30"></div>
-          <div className="absolute top-80 right-60 w-32 h-32 glass-panel rounded-lg rotate-45 opacity-50"></div>
-          <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] bg-secondary-container/10 blur-[120px] rounded-full"></div>
-        </div>
+      <Navbar resumeUrl={user?.resumeUrl} />
+      <main className="relative z-10">
+        {hasError ? (
+          <div className="mx-auto mt-24 flex w-full max-w-(--container-page) items-center gap-3 rounded-2xl border border-line bg-surface/60 px-5 py-4 text-sm text-muted">
+            <TriangleAlert className="h-4 w-4 shrink-0 text-accent-2" />
+            Some content couldn&apos;t be loaded right now. Sections below may be
+            temporarily empty.
+          </div>
+        ) : null}
 
         <HeroSection
-          user={user?.data}
+          user={user}
+          skills={skills}
           projectCount={projectCount}
           skillCount={skillCount}
         />
-
-        <ProjectsSection projects={projects} />
-
-        <AboutSection user={user?.data} />
-
-        <SkillsSection skills={skills?.data} />
-
-        <EducationSection educations={educations?.data} />
-
-        <ContactSection user={user?.data} />
+        <ProjectsStack projects={projects} />
+        <TechTree skills={skills} />
+        <ExperienceSection experiences={experiences} />
+        <EducationSection educations={educations} />
+        <AboutSection user={user} />
+        <ContactSection user={user} />
       </main>
-      <Footer user={user?.data} />
+      <Footer user={user} />
     </>
   );
 }

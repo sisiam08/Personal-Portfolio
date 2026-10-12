@@ -1,221 +1,224 @@
 "use client";
+
 import { useState } from "react";
 import toast from "react-hot-toast";
-import MagneticButton from "./MagneticButton";
+import {
+  CircleCheck,
+  LoaderCircle,
+  Mail,
+  Phone,
+  Send,
+} from "lucide-react";
 import { createMessage } from "@/src/action/message.action";
+import SectionHeading from "./SectionHeading";
+import { WhatsappIcon } from "./BrandIcons";
+import type { ProfileUser } from "./types";
 
-export default function ContactSection({ user }: { user?: any }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+type Status = "idle" | "submitting" | "success" | "error";
 
-  const handleChange = (
+const inputClass =
+  "w-full rounded-xl border border-line bg-canvas px-4 py-3 text-base text-ink placeholder:text-faint outline-none transition-colors focus:border-accent lg:text-sm";
+
+export default function ContactSection({
+  user,
+}: {
+  user?: ProfileUser | null;
+}) {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
+
+  const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    setForm((prev) => ({ ...prev, [id]: value }));
+    if (status === "success" || status === "error") setStatus("idle");
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    const res = await createMessage(formData);
+    setStatus("submitting");
+    const res = await createMessage(form);
     if (res.error) {
+      setStatus("error");
       toast.error(res.error);
-    } else {
-      toast.success("Message sent successfully");
-      setFormData({ name: "", email: "", message: "" });
+      return;
     }
-    setIsSubmitting(false);
+    setStatus("success");
+    toast.success("Message sent successfully");
+    setForm({ name: "", email: "", message: "" });
   };
+
+  const details = [
+    user?.email && {
+      label: "Email",
+      value: user.email,
+      // mailto: is dead weight for visitors without a configured mail client —
+      // open Gmail's compose window instead so the link always does something.
+      href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(user.email)}`,
+      Icon: Mail,
+    },
+    user?.phone && {
+      label: "Phone",
+      value: user.phone,
+      href: `tel:${user.phone}`,
+      Icon: Phone,
+    },
+    user?.whatsapp && {
+      label: "WhatsApp",
+      value: user.whatsapp,
+      href: `https://wa.me/${user.whatsapp}`,
+      Icon: WhatsappIcon,
+    },
+  ].filter(Boolean) as {
+    label: string;
+    value: string;
+    href: string;
+    Icon: typeof Mail;
+  }[];
 
   return (
-    <section id="contact" className="pt-section-gap">
-      <div className="text-center mb-stack-lg">
-        <p className="text-primary font-label-caps architectural-tracking mb-2">
-          Contact
-        </p>
-        <h2 className="font-h1 text-xl text-on-surface">Get in Touch</h2>
-      </div>
-      <div className="grid md:grid-cols-2 gap-gutter max-w-6xl mx-auto items-start">
-        {/* Contact Form */}
-        <div className="glass-panel-high rounded-[2.5rem] p-8 md:p-12 animate-reveal-left">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label
-                className="block text-on-surface-variant text-sm font-label-caps architectural-tracking mb-2"
-                htmlFor="name"
-              >
+    <section
+      id="contact"
+      className="mx-auto w-full max-w-[var(--container-page)] px-[var(--spacing-page)] pt-[var(--spacing-section)]"
+    >
+      <SectionHeading
+        index="06"
+        eyebrow="Contact"
+        title="Let's build something worth shipping."
+        description="Tell me about the problem you're solving. I usually reply within a day."
+      />
+
+      <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-14">
+        <form
+          onSubmit={onSubmit}
+          className="flex flex-col gap-5 rounded-3xl border border-line bg-surface/60 p-6 md:p-8"
+        >
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className="mono-label text-muted">
                 Name
               </label>
               <input
-                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
                 id="name"
-                placeholder="Enter your name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
+                name="name"
+                className={inputClass}
+                placeholder="Your name"
+                value={form.name}
+                onChange={onChange}
                 required
               />
             </div>
-            <div>
-              <label
-                className="block text-on-surface-variant text-sm font-label-caps architectural-tracking mb-2"
-                htmlFor="email"
-              >
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="mono-label text-muted">
                 Email
               </label>
               <input
-                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md"
                 id="email"
-                placeholder="name@example.com"
+                name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
+                className={inputClass}
+                placeholder="you@company.com"
+                value={form.email}
+                onChange={onChange}
                 required
               />
             </div>
-            <div>
-              <label
-                className="block text-on-surface-variant text-sm font-label-caps architectural-tracking mb-2"
-                htmlFor="message"
-              >
-                Message
-              </label>
-              <textarea
-                className="w-full bg-surface-container border border-outline-variant/40 rounded-xl px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-md resize-none"
-                id="message"
-                placeholder="How can I help you?"
-                rows={4}
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            <MagneticButton
-              hideBorder
-              containerClassName="w-full rounded-xl"
-              className={`w-full glass-panel text-on-surface py-4 rounded-xl font-bold architectural-tracking transition-all duration-300 shadow-md hover:shadow-lg ${
-                isSubmitting
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-primary/10"
-              }`}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="message" className="mono-label text-muted">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={6}
+              className={`${inputClass} resize-none`}
+              placeholder="What are you building?"
+              value={form.message}
+              onChange={onChange}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={status === "submitting"}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 sm:w-auto"
             >
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </MagneticButton>
-          </form>
-        </div>
-        {/* Contact Details */}
-        <div className="flex flex-col justify-center h-full space-y-10 md:pl-10 animate-reveal-right">
-          <div className="space-y-4">
-            <h3 className="text-h3 text-on-surface font-h3 architectural-tracking">
-              Let's talk about your project.
-            </h3>
-            <p className="text-on-surface-variant body-lg architectural-tracking">
-              I'm always open to discussing new projects, creative ideas or
-              opportunities to be part of your visions.
+              {status === "submitting" ? (
+                <>
+                  <LoaderCircle className="h-4 w-4 animate-spin" />
+                  Sending…
+                </>
+              ) : status === "success" ? (
+                <>
+                  <CircleCheck className="h-4 w-4" />
+                  Sent
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" />
+                  Send message
+                </>
+              )}
+            </button>
+            <p
+              aria-live="polite"
+              className="text-xs text-muted"
+            >
+              {status === "success"
+                ? "Thanks — your message is on its way."
+                : status === "error"
+                  ? "Something went wrong. Try again."
+                  : ""}
             </p>
           </div>
-          <div className="space-y-6">
-            {user?.email && (
-              <a
-                className="flex items-center gap-4 group cursor-pointer"
-                href={`mailto:${user.email}`}
-              >
-                <MagneticButton
-                  asDiv
-                  containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-primary transition-all duration-500"
-                >
-                  <span
-                    className="material-symbols-outlined text-2xl"
-                    data-icon="mail"
-                  >
-                    mail
-                  </span>
-                </MagneticButton>
-                <div>
-                  <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
-                    Email
-                  </p>
-                  <p className="text-on-surface font-bold architectural-tracking">
-                    {user.email}
-                  </p>
-                </div>
-              </a>
-            )}
+        </form>
 
-            {user?.phone && (
-              <a
-                className="flex items-center gap-4 group cursor-pointer"
-                href={`tel:${user.phone}`}
-              >
-                <MagneticButton
-                  asDiv
-                  containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-secondary transition-all duration-500"
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-3xl border border-line">
+            {details.length > 0 ? (
+              details.map(({ label, value, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group flex items-center gap-4 p-5 transition-colors hover:bg-surface-2/60"
                 >
-                  <span
-                    className="material-symbols-outlined text-2xl"
-                    data-icon="call"
-                  >
-                    call
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent">
+                    <Icon className="h-5 w-5" />
                   </span>
-                </MagneticButton>
-                <div>
-                  <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
-                    Call
-                  </p>
-                  <p className="text-on-surface font-bold architectural-tracking">
-                    {user.phone}
-                  </p>
-                </div>
-              </a>
-            )}
-
-            {user?.whatsapp && (
-              <a
-                className="flex items-center gap-4 group cursor-pointer"
-                href={`https://wa.me/${user.whatsapp}`}
-              >
-                <MagneticButton
-                  asDiv
-                  containerClassName="rounded-2xl shrink-0"
-                  className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-[#25D366] transition-all duration-500"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.005-1.413.248-.695.248-1.29.173-1.414z" />
-                  </svg>
-                </MagneticButton>
-                <div>
-                  <p className="text-on-surface-variant text-xs font-label-caps architectural-tracking">
-                    WhatsApp
-                  </p>
-                  <p className="text-on-surface font-bold architectural-tracking">
-                    {user.whatsapp}
-                  </p>
-                </div>
-              </a>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="mono-label text-faint">{label}</span>
+                    <span className="truncate text-sm font-medium text-ink">
+                      {value}
+                    </span>
+                  </span>
+                </a>
+              ))
+            ) : (
+              <p className="p-5 text-sm text-muted">
+                Contact details will appear here once added.
+              </p>
             )}
           </div>
-          <div className="p-6 glass-panel rounded-2xl border-l-4 border-primary">
-            <p className="text-sm text-on-surface-variant italic architectural-tracking">
-              "Usually responds within 24 hours for project inquiries."
+
+          <div className="rounded-3xl border border-line bg-surface/60 p-6">
+            <p className="font-display text-base font-semibold text-ink">
+              {user?.name || "Shahariar Siam"}
             </p>
+            <p className="mt-1 text-sm text-muted">
+              {user?.designation || "Full Stack Developer"} — open to freelance,
+              full-time, and collaborative work.
+            </p>
+            <div className="mt-4 flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-accent-3 animate-pulse-dot" />
+              <span className="mono-label text-muted">Available now</span>
+            </div>
           </div>
         </div>
       </div>

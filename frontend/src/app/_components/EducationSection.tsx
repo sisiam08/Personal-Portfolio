@@ -1,73 +1,61 @@
-interface Education {
-  degree: string;
-  institute: string;
-  field: string;
-  startYear: number;
-  endYear?: number | null;
-}
+import { GraduationCap } from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import Reveal from "./Reveal";
+import EmptyState from "./EmptyState";
+import type { Education } from "./types";
 
-interface EducationSectionProps {
-  educations: Education[] | null | undefined;
-}
-
-export default function EducationSection({ educations }: EducationSectionProps) {
+export default function EducationSection({
+  educations,
+}: {
+  educations: Education[];
+}) {
   return (
-    <section id="education" className="pt-section-gap">
-      <div className="text-center mb-stack-lg">
-        <p className="text-primary font-label-caps architectural-tracking mb-2">
-          Evolution
-        </p>
-        <h2 className="font-h1 text-xl text-on-surface">Learning &amp; Growth</h2>
-      </div>
+    <section
+      id="education"
+      className="mx-auto w-full max-w-[var(--container-page)] px-[var(--spacing-page)] pt-[var(--spacing-section)]"
+    >
+      <SectionHeading
+        index="04"
+        eyebrow="Foundations"
+        title="Learning, formalised."
+      />
 
-      <div className="max-w-4xl mx-auto relative px-gutter">
-        {/* Timeline Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 timeline-connector -translate-x-1/2 hidden md:block"></div>
-
-        <div className="space-y-12">
-          {educations?.map((edu, index) => {
-            const isLeft = index % 2 === 0;
-
+      {educations.length === 0 ? (
+        <div className="mt-12">
+          <EmptyState
+            icon={<GraduationCap className="h-5 w-5" />}
+            title="No education listed yet"
+            message="Education records added through the API will appear here."
+          />
+        </div>
+      ) : (
+        <div className="mt-14 flex flex-col">
+          {educations.map((edu, i) => {
+            const end = edu.endYear ?? "Present";
             return (
-              <div
-                key={index}
-                className={`relative flex flex-col ${
-                  isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                } items-center justify-between group`}
-              >
-                {/* Card */}
-                <div className="md:w-[45%] mb-4 md:mb-0">
-                  <div className="glass-panel-high p-6 rounded-2xl hover:bg-primary/5 transition-all duration-300 shadow-xl">
-                    {/* Year */}
-                    <span className="text-primary font-label-caps text-[10px] architectural-tracking">
-                      {edu.startYear} — {edu.endYear ?? "Present"}
-                    </span>
-
-                    {/* Title */}
-                    <h3 className="text-on-surface font-bold text-lg mt-1 architectural-tracking">
+              <Reveal as="article" key={edu.id ?? i} delay={i * 0.06}>
+                <div className="group grid grid-cols-1 gap-4 border-t border-line py-8 transition-colors hover:bg-surface-2/40 md:grid-cols-[160px_1fr] md:gap-8 md:px-4">
+                  <div className="font-display text-3xl font-semibold text-faint transition-colors group-hover:text-accent">
+                    {edu.startYear}
+                    <span className="text-line-2">–</span>
+                    {end}
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="font-display text-xl font-semibold text-ink">
                       {edu.degree}
                     </h3>
-
-                    {/* Institute */}
-                    <p className="text-primary text-sm mt-1">{edu.institute}</p>
-
-                    {/* Field */}
-                    <p className="text-on-surface-variant text-sm mt-2 architectural-tracking">
+                    <p className="text-sm font-medium text-accent">
                       {edu.field}
                     </p>
+                    <p className="text-sm text-muted">{edu.institute}</p>
                   </div>
                 </div>
-
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(192,193,255,0.8)] z-10"></div>
-
-                {/* Empty Side */}
-                <div className="md:w-[45%]"></div>
-              </div>
+              </Reveal>
             );
           })}
+          <div className="border-t border-line" />
         </div>
-      </div>
+      )}
     </section>
   );
 }

@@ -2,42 +2,21 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-
-import { Button } from "@/src/components/ui/button";
 
 export function ModeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   const isDark = resolvedTheme === "dark";
 
-  const toggle = () => setTheme(isDark ? "light" : "dark");
-
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={toggle}
-      aria-label="Toggle theme"
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      suppressHydrationWarning
+      className="grid h-11 w-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-line-2 hover:bg-surface-2 lg:h-10 lg:w-10"
     >
-      {isDark ? (
-        <Moon
-          className={`h-[1.2rem] w-[1.2rem] transition-colors text-white`}
-        />
-      ) : (
-        <Sun
-          className={`h-[1.2rem] w-[1.2rem] transition-colors text-brand-ink`}
-        />
-      )}
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+      <Sun className="hidden h-[1.05rem] w-[1.05rem] dark:block" />
+      <Moon className="block h-[1.05rem] w-[1.05rem] dark:hidden" />
+    </button>
   );
 }
-
